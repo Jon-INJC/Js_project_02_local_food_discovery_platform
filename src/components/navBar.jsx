@@ -36,7 +36,7 @@ function Nav() {
           </div>
           <a
             href=""
-            className="hidden p-1 px-4 pt-1 text-on-tertiary bg-secondary rounded-md baseline hover:-mt-1 md:block"
+            className="hidden p-1 px-4 pt-1 text-on-tertiary bg-secondary rounded-sm baseline hover:-mt-1 md:block"
           >LIST YOUR RESTAURANT</a>
         </div>
       </nav>
