@@ -2,9 +2,9 @@ import navBarLogo from "../assets/Aura_logo.svg";
 function Nav() {
   return (
     <header className="w-screen bg-surface-bright">
-      <nav className="relative container mx-auto p-6">
+      <nav className="relative container mx-auto p-6 max-w-4xl">
         <div className="flex items-center justify-between">
-          <div className="pt-2">
+          <div>
             <img src={navBarLogo} alt="Aura logo" />
           </div>
 
@@ -36,7 +36,7 @@ function Nav() {
           </div>
           <a
             href=""
-            className="p-1 px-4 pt-1 text-on-tertiary bg-secondary rounded-md baseline hover:-mt-1"
+            className="hidden p-1 px-4 pt-1 text-on-tertiary bg-secondary rounded-md baseline hover:-mt-1 md:block"
           >LIST YOUR RESTAURANT</a>
         </div>
       </nav>
