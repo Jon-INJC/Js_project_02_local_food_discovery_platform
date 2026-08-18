@@ -1,5 +1,6 @@
-function header(){
-  return(<h1 className="text-3xl font-bold">hello world</h1>);
+import Nav from "./components/navBar.jsx";
+function app(){
+  return <Nav />;
 }
 
-export default header
+export default app
