@@ -1,6 +1,6 @@
-import Nav from "./components/navBar.jsx";
+import Home from "./pages/home.jsx"
 function app(){
-  return <Nav />;
+  return <Home />;
 }
 
 export default app
