@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 @theme {
+    --color-outline-variant: oklch(83.231% 0.04513 40.759 / 0.3);
+    --color-surface: oklch(98.365% 0.0021 14.267);
     --color-on-surface: oklch(22.537% 0.00154 197.968);
     --color-secondary: oklch(48.284% 0.00126 14.803);
     --color-dark-gray: oklch(39.758% 0.00161 106.905);
