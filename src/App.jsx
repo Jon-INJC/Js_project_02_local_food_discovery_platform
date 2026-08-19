@@ -1,5 +1,6 @@
-function header(){
-  return(<h1 className="text-3xl font-bold">hello world</h1>);
+import Home from "./pages/home.jsx"
+function app(){
+  return <Home />;
 }
 
-export default header
+export default app
