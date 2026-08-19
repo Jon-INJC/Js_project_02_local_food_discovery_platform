@@ -1,4 +1,5 @@
 import Nav from "../components/navBar";
+import Footer from "../components/footer";
 function home() {
   return (
     <>
@@ -168,6 +169,7 @@ function home() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }
