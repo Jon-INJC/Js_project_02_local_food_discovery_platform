@@ -77,6 +77,35 @@ function Explore() {
             </div>
           </div>
         </section>
+        <section className="w-screen max-w-4xl px-6 mx-auto">
+          <div className="container flex flex-col space-y-6 mt-10">
+            <h2 className="max-w-md text-left text-4xl font-bold font-main-header">
+              Curated Collections
+            </h2>
+            <div className="flex gap-6 pl-6 overflow-x-auto">
+                <div className="flex flex-col items-start shrink-0">
+                    <img src="https://placehold.co/300x400/orange/white" alt="" className="w-50 h-55 object-cover" />
+                    <h3 className="text-left text-2xl font-bold font-main-header">Morning Brews</h3>
+                    <p className="text-sm text-secondary">12 Spots</p>
+                </div>
+                <div className="flex flex-col items-start shrink-0">
+                    <img src="https://placehold.co/300x400/orange/white" alt="" className="w-50 h-55 object-cover" />
+                    <h3 className="text-left text-2xl font-bold font-main-header">Artisan Pastry</h3>
+                    <p className="text-sm text-secondary">8 Spots</p>
+                </div>
+                <div className="flex flex-col items-start shrink-0">
+                    <img src="https://placehold.co/300x400/orange/white" alt="" className="w-50 h-55 object-cover" />
+                    <h3 className="text-left text-2xl font-bold font-main-header">Haute Cuisine</h3>
+                    <p className="text-sm text-secondary">4 Spots</p>
+                </div>
+                <div className="flex flex-col items-start shrink-0">
+                    <img src="https://placehold.co/300x400/orange/white" alt="" className="w-50 h-55 object-cover" />
+                    <h3 className="text-left text-2xl font-bold font-main-header">Evening Spirits</h3>
+                    <p className="text-sm text-secondary">6 Spots</p>
+                </div>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
