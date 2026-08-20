@@ -2,6 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 
+@utility no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
 
 @theme {
 
@@ -17,5 +24,6 @@
     --color-surface-bright: oklch(98.365% 0.0021 14.267 / 0.9);
     --color-on-tertiary: oklch(100% 0.00011 271.152);
     --color-surface-container-low: oklch(96.569% 0.00211 14.336);
+    --color-surface-container-highest: oklch(91.357% 0.00106 11.782);
     --color-on-secondary-fixed-variant: oklch(39.758% 0.00161 106.905);
 }
