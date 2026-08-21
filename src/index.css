@@ -25,5 +25,7 @@
     --color-on-tertiary: oklch(100% 0.00011 271.152);
     --color-surface-container-low: oklch(96.569% 0.00211 14.336);
     --color-surface-container-highest: oklch(91.357% 0.00106 11.782);
+    --color-surface-container-high: oklch(93.149% 0.00163 66.336);
     --color-on-secondary-fixed-variant: oklch(39.758% 0.00161 106.905);
+    --color-primary-fixed-dim: oklch(83.629% 0.09437 40.839);
 }
