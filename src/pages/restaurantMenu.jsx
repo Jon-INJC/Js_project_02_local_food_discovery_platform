@@ -15,7 +15,7 @@ function Menu() {
               />
             </div>
             <div className="flex flex-col gap-y-3 absolute left-5 bottom-40 md:bottom-15">
-              <p className="text-xm text-primary-fixed-dim font-bold">
+              <p className="text-sm text-primary-fixed-dim font-bold">
                 CONTEMPORARY NORDIC
               </p>
               <h1 className="text-left text-4xl text-surface-container-high font-bold font-main-header">
@@ -85,7 +85,54 @@ function Menu() {
               A curated 9-course experience capturing the transition from late
               summer abundance to the deep, earthy tones of autumn.
             </p>
-            <div></div>
+            <div className="flex flex-col gap-x-4 md:flex-row">
+              <div>
+                <div className="flex flex-col relative">
+                    <p className="absolute top-2 left-2 px-3 bg-surface-container-lowest border-2 border-outline-variant text-sm text-on-surface rounded-sm">Signature</p>
+                  <img
+                    src="https://placehold.co/400x500/orange/white"
+                    alt=""
+                    className="w-full max-h-50 object-cover"
+                  />
+                  <div className="flex justify-between">
+                    <h3 className="text-left text-2xl font-bold font-main-header">
+                      Diver Scallop & Pine
+                    </h3>
+                    <p className="text-xs text-on-surface">$32</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p className="text-xs text-on-surface-variant">
+                      Hand-dived Hitra scallops gently warmed, served with
+                      salted green strawberries, pine needle oil, and buttermilk
+                      snow.
+                    </p>
+                    <p className="text-xs text-on-surface">2k</p>
+                  </div>
+                </div>
+              </div>
+              <div className="">
+                <div className="flex flex-col">
+                  <img
+                    src="https://placehold.co/400x500/orange/white"
+                    alt=""
+                    className="w-full max-h-50 object-cover"
+                  />
+                  <div className="flex justify-between">
+                    <h3 className="text-left text-2xl font-bold font-main-header">
+                      Heritage Emmer Bread
+                    </h3>
+                    <p className="text-xs text-on-surface">$14</p>
+                  </div>
+                  <div className="flex justify-between">
+                    <p className="text-xs text-on-surface-variant">
+                      Warm sourdough made from ancient grains, accompanied by
+                      cultured brown butter and smoked sea salt.
+                    </p>
+                    <p className="text-xs text-on-surface"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
