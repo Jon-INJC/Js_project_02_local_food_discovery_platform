@@ -18,12 +18,16 @@
     --color-outline-variant: oklch(83.231% 0.04513 40.759 / 0.3);
     --color-surface: oklch(98.365% 0.0021 14.267);
     --color-on-surface: oklch(22.537% 0.00154 197.968);
+    --color-on-surface-variant: oklch(40.02% 0.03812 40.617);
     --color-secondary: oklch(48.284% 0.00126 14.803);
+    --color-surface-container-lowest: oklch(100% 0.00011 271.152 / 0.9);
     --color-dark-gray: oklch(39.758% 0.00161 106.905);
     --color-primary: oklch(48.995% 0.15334 40.123);
     --color-surface-bright: oklch(98.365% 0.0021 14.267 / 0.9);
     --color-on-tertiary: oklch(100% 0.00011 271.152);
     --color-surface-container-low: oklch(96.569% 0.00211 14.336);
     --color-surface-container-highest: oklch(91.357% 0.00106 11.782);
+    --color-surface-container-high: oklch(93.149% 0.00163 66.336);
     --color-on-secondary-fixed-variant: oklch(39.758% 0.00161 106.905);
+    --color-primary-fixed-dim: oklch(83.629% 0.09437 40.839);
 }
