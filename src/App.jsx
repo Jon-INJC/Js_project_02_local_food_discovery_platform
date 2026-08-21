@@ -1,6 +1,7 @@
-import Home from "./pages/home.jsx"
+//import Home from "./pages/home.jsx"
+import Explore from "./pages/explore.jsx";
 function app(){
-  return <Home />;
+  return <Explore />;
 }
 
 export default app
