@@ -30,4 +30,5 @@
     --color-surface-container-high: oklch(93.149% 0.00163 66.336);
     --color-on-secondary-fixed-variant: oklch(39.758% 0.00161 106.905);
     --color-primary-fixed-dim: oklch(83.629% 0.09437 40.839);
+    --color-surface-variant: oklch(91.357% 0.00106 11.782);
 }
