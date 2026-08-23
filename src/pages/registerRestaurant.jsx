@@ -1,5 +1,6 @@
 import navBarLogo from "../assets/Aura_logo.svg";
-import RegStep1 from "../components/restaurantRegStep1";
+//import RegStep1 from "../components/restaurantRegStep1";
+import RegStep2 from "../components/restaurantRegStep2";
 function RegisterForm() {
   return (
     <>
@@ -15,7 +16,7 @@ function RegisterForm() {
       </header>
       <main className="bg-surface-bright">
         <section className="w-screen max-w-4xl px-6 mx-auto">
-            <RegStep1 />
+            <RegStep2 />
         </section>
       </main>
       <footer className="w-full py-3 flex justify-center items-center text-sm text-secondary">

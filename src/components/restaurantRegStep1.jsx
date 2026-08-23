@@ -1,7 +1,7 @@
 function RegStep1() {
   return (
     <>
-      <div className="max-w-125 mx-auto pt-10 flex flex-col gap-y-4 items-center">
+      <div className="container max-w-125 mx-auto pt-10 flex flex-col gap-y-4 items-center">
         <div className="flex flex-col items-center gap-y-2">
             <p className="text-sm text-secondary font-bold">STEP 1 OF 3</p>
             <div className="w-50 h-1 bg-surface-variant rounded-full">
