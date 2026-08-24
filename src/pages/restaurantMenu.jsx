@@ -33,12 +33,12 @@ function Menu() {
                 <p>Aker Brygge, Oslo</p>
                 <p className="text-primary">4.9 (128 reviews)</p>
               </div>
-              <div className="flex gap-x-2">
-                <div className="w-12.5 h-10 flex items-center justify-center border-3 border-solid border-secondary rounded-sm md:border-surface-container-high">
-                  Like
+              <div className="flex gap-x-2 text-secondary md:text-surface-container-high">
+                <div className="w-10 h-7.5 flex items-center justify-center border-3 border-solid border-secondary rounded-sm md:border-surface-container-high">
+                  <i className="fa-regular fa-heart"></i>
                 </div>
-                <div className="w-12.5 h-10 flex items-center justify-center border-3 border-solid border-secondary rounded-sm md:border-surface-container-high">
-                  share
+                <div className="w-10 h-7.5 flex items-center justify-center border-3 border-solid border-secondary rounded-sm md:border-surface-container-high">
+                  <i className="fa-solid fa-share-nodes"></i>
                 </div>
               </div>
             </div>

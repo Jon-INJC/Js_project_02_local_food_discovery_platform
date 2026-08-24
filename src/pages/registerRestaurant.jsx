@@ -1,0 +1,30 @@
+import navBarLogo from "../assets/Aura_logo.svg";
+//import RegStep1 from "../components/restaurantRegStep1";
+//import RegStep2 from "../components/restaurantRegStep2";
+import RegStep3 from "../components/restaurantRegStep3";
+function RegisterForm() {
+  return (
+    <>
+      <header className="w-screen px-6 bg-surface-bright border-2 border-outline-variant">
+        <div className="container max-w-4xl mx-auto py-3 flex justify-between items-center">
+          <div>
+            <img src={navBarLogo} alt="Aura logo" />
+          </div>
+          <div>
+            <p className="text-secondary text-md"><i class="fa-solid fa-xmark"></i>Cancel Listing</p>
+          </div>
+        </div>
+      </header>
+      <main className="bg-surface-bright">
+        <section className="w-screen max-w-4xl px-6 mx-auto">
+            <RegStep3 />
+        </section>
+      </main>
+      <footer className="w-full py-3 flex justify-center items-center text-sm text-secondary">
+        <p>© 2024 AURA EDITORIAL. SECURE LISTING PORTAL.</p>
+      </footer>
+    </>
+  );
+}
+
+export default RegisterForm;
