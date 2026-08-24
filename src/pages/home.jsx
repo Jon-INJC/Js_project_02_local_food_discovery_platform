@@ -1,5 +1,6 @@
 import Nav from "../components/navBar";
 import Footer from "../components/footer";
+import { Search } from "lucide-react"
 function home() {
   return (
     <>
@@ -62,7 +63,8 @@ function home() {
               What are you craving?
             </h2>
 
-            <div className="flex px-6 py-3 border-b-2 border-secondary">
+            <div className="flex items-center gap-x-2 px-6 py-3 border-b-2 border-secondary">
+              <Search className="w-5 h-5 text-secondary" />
               {/* icon */}
               <input
                 className="w-100 border-none outline-none focus:ring-0"
