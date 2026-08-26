@@ -15,7 +15,9 @@
     --font-main-header: "Playfair Display", serif;
     --font-main-body: "Inter", sans-serif;
 
+    --color-outline: oklch(57.268% 0.04234 38.567);
     --color-outline-variant: oklch(83.231% 0.04513 40.759 / 0.3);
+    --color-on-surface-outline-variant: oklch(83.231% 0.04513 40.759);
     --color-surface: oklch(98.365% 0.0021 14.267);
     --color-on-surface: oklch(22.537% 0.00154 197.968);
     --color-on-surface-variant: oklch(40.02% 0.03812 40.617);
@@ -23,6 +25,7 @@
     --color-surface-container-lowest: oklch(100% 0.00011 271.152 / 0.9);
     --color-dark-gray: oklch(39.758% 0.00161 106.905);
     --color-primary: oklch(48.995% 0.15334 40.123);
+    --color-inverse-primary: oklch(83.629% 0.09437 40.839);
     --color-surface-bright: oklch(98.365% 0.0021 14.267 / 0.9);
     --color-on-tertiary: oklch(100% 0.00011 271.152);
     --color-surface-container-low: oklch(96.569% 0.00211 14.336);
@@ -32,4 +35,6 @@
     --color-primary-fixed-dim: oklch(83.629% 0.09437 40.839);
     --color-surface-variant: oklch(91.357% 0.00106 11.782);
     --color-surface-container: oklch(94.765% 0.00213 14.404);
+    --color-surface-tint: oklch(48.995% 0.15334 40.123 / 0.05);
+    --color-primary-fixed: oklch(91.833% 0.0434 39.187);
 }
