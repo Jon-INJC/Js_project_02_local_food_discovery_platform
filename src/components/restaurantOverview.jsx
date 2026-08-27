@@ -18,7 +18,7 @@ function Overview() {
         </div>
         <button
           type="button"
-          className="text-sm flex justify-center items-center px-3 py-3 border text-on-tertiary bg-secondary hover:cursor-pointer"
+          className="text-xs flex justify-center items-center px-3 py-3 border text-on-tertiary bg-primary hover:cursor-pointer"
         >
           <Plus className="w-5 h-5" />
           Add Menu Item
@@ -36,7 +36,7 @@ function Overview() {
           </div>
           <button
             type="button"
-            className=" hidden text-sm justify-center items-center px-3 py-3 border text-on-tertiary bg-secondary hover:cursor-pointer md:flex"
+            className=" hidden text-xs justify-center items-center px-3 py-3 border text-on-tertiary bg-primary hover:cursor-pointer md:flex"
           >
             <Plus className="w-5 h-5" />
             Add Menu Item
@@ -106,7 +106,7 @@ function Overview() {
             </button>
           </div>
         </div>
-        <div className="grid gap-6 md:justify-items-center md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
           {/* first card */}
           <div className="max-w-lg flex p-4 border-2 border-outline-variant">
             <div className="relative">
