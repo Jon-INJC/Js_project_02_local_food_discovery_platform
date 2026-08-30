@@ -1,5 +1,6 @@
 import { Eye } from "lucide-react";
 import navBarLogo from "../assets/Aura_logo.svg";
+import LineGraph from "./analyticsLineGraph";
 function DashAnalytics() {
   return (
     <>
@@ -101,7 +102,9 @@ function DashAnalytics() {
                     <a href="#" className="text-xs pb-1 text-secondary font-semibold hover:text-primary hover:border-b-2 hover:border-primary hover:-translate-y-1">All Metrics</a>
                 </div>
             </div>
-            <div className="container"></div>
+            <div className="h-80 w-full mt-4 md:h-125">
+                <LineGraph />
+            </div>
         </div>
         <div className="container mt-7 grid gap-4 grid-cols-12 grid-rows-12">
             <div className="col-span-12 row-span-12 p-4 border-2 border-outline-variant md:col-span-7">
