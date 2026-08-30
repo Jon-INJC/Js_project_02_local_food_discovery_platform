@@ -1,4 +1,4 @@
-import { Eye, ArrowUp, Heart, Bookmark } from "lucide-react";
+import { Eye, ArrowUp, Heart, Bookmark, Flame } from "lucide-react";
 import navBarLogo from "../assets/Aura_logo.svg";
 import LineGraph from "./analyticsLineGraph";
 import PieGraph from "./analyticsPieChart";
@@ -165,10 +165,65 @@ function DashAnalytics() {
                 9.1%
                 <p className="text-xs font-light font-main-body flex items-center"><ArrowUp className="w-3 h-3"/> 2.4%</p>
             </span>
-            <div className="w-50 h-1 bg-surface-variant rounded-full">
-              <div className="w-1/3 h-1 bg-primary rounded-full"></div>
+            <div className="h-1 bg-surface-variant rounded-full">
+              <div className="w-1/4 h-1 bg-primary rounded-full"></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="container mt-7 p-6 border-2 border-outline-variant">
+        <div className="pb-4 mb-7 flex items-center justify-between border-b-2 border-outline-variant">
+          <span className="text-2xl text-on-surface font-bold font-main-header">
+            Recent Activity
+          </span>
+            <a
+              href="#"
+              className="text-sm font-semibold text-primary underline decoration-primary hover:-translate-y-1"
+            >
+              View All
+            </a>
+        </div>
+        <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3">
+                <span className="w-10 h-10 flex items-center justify-center bg-surface-dim rounded-md">
+                    <Heart className="w-5 h-5 text-primary" />
+                </span>
+                <div className="flex flex-col gap-1">
+                    <p className="text-sm text-on-surface">
+                        A guest liked Lemon Tart.
+                    </p>
+                    <p className="text-xs text-secondary">
+                        2 minutes ago
+                    </p>
+                </div>
+            </div>
+            <div className="flex items-center gap-3">
+                <span className="w-10 h-10 flex items-center justify-center bg-surface-dim rounded-md">
+                    <Bookmark className="w-5 h-5 text-primary" />
+                </span>
+                <div className="flex flex-col gap-1">
+                    <p className="text-sm text-on-surface">
+                        Aura was saved to a Date Night Collection.
+                    </p>
+                    <p className="text-xs text-secondary">
+                        15 minutes ago
+                    </p>
+                </div>
+            </div>
+            <div className="flex items-center gap-3">
+                <span className="w-10 h-10 flex items-center justify-center bg-surface-dim rounded-md">
+                    <Flame className="w-5 h-5 text-primary" />
+                </span>
+                <div className="flex flex-col gap-1">
+                    <p className="text-sm text-on-surface font-bold">
+                        Truffle Risotto is currently trending (50+ views in last hour).
+                    </p>
+                    <p className="text-xs text-secondary">
+                        1 hour ago
+                    </p>
+                </div>
+            </div>
         </div>
       </div>
     </>

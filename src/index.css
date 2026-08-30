@@ -38,4 +38,5 @@
     --color-surface-tint: oklch(48.995% 0.15334 40.123 / 0.05);
     --color-primary-fixed: oklch(91.833% 0.0434 39.187);
     --color-primary-fixed-dim: oklch(83.629% 0.09437 40.839);
+    --color-surface-dim: oklch(88.887% 0.00166 66.423);
 }
