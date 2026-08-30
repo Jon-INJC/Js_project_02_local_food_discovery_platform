@@ -1,4 +1,4 @@
-import { Eye } from "lucide-react";
+import { Eye, ArrowUp, Heart, Bookmark } from "lucide-react";
 import navBarLogo from "../assets/Aura_logo.svg";
 import LineGraph from "./analyticsLineGraph";
 import PieGraph from "./analyticsPieChart";
@@ -116,12 +116,35 @@ function DashAnalytics() {
       </div>
       <div className="container mt-7 grid gap-4 grid-cols-12 grid-rows-12">
         <div className="col-span-12 row-span-12 p-4 border-2 border-outline-variant md:col-span-7">
-          <span className="block pb-2 mb-4 text-xl text-on-surface font-bold font-main-header border-b-2 border-outline-variant">
+          <span className="block pb-2 mb-10 text-xl text-on-surface font-bold font-main-header border-b-2 border-outline-variant">
             Most Engaged Menu Items
           </span>
-          <div className="flex items-center gap-x-2"></div>
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-2">
+                <span className="mr-3 text-2xl text-primary-fixed-dim font-main-header font-bold">01</span>
+                <img src="https://placehold.co/200x100/orange/white" alt="" className="w-13 h-13 rounded-md border-2 border-outline-variant object-cover" />
+                <div className="flex flex-col gap-1">
+                    <span className="text-xl text-on-surface font-main-header font-bold">Truffle Risotto</span>
+                    <div className="flex items-center gap-3">
+                        <p className="text-xs text-secondary font-medium flex items-center gap-1">
+                            < Eye className="w-3 h-3" />
+                            1,284 Views
+                        </p>
+                        <p className="text-xs text-secondary font-medium flex items-center gap-1">
+                            < Heart className="w-3 h-3" />
+                            183 Likes
+                        </p>
+                        <p className="text-xs text-secondary font-medium flex items-center gap-1">
+                            < Bookmark className="w-3 h-3" />
+                            74 Saves
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a href="#" className="text-sm text-primary underline decoration-primary font-semibold">VIEW FULL MENU PERFORMANCE</a>
+          </div>
         </div>
-        <div className="h-100 relative col-span-5 row-span-8 p-4 border-2 border-outline-variant">
+        <div className="hidden h-100 relative col-span-5 row-span-8 p-4 border-2 border-outline-variant md:block">
           <span className="block pb-2 mb-3 text-xl text-on-surface font-bold font-main-header border-b-2 border-outline-variant">
             Discovery Sources
           </span>
@@ -130,11 +153,22 @@ function DashAnalytics() {
             <PieGraph />
           </div>
         </div>
-        <div className="col-span-5 row-span-4 p-4 border-2 border-outline-variant">
-          <span className="block pb-2 mb-3 text-xl text-on-surface font-bold font-main-header">
+        <div className="hidden col-span-5 row-span-4 p-6 border-2 border-outline-variant md:block">
+          <span className="block pb-2 mb-1 text-2xl text-on-surface font-bold font-main-header">
             Overall Engagement Rate
           </span>
-          <p>Percentage of views resulting in a like or save.</p>
+          <p className="text-sm text-secondary mb-4">
+            Percentage of views resulting in a like or save.
+          </p>
+          <div className="flex flex-col gap-y-2">
+            <span className="flex gap-2 items-end text-2xl text-primary font-main-header font-bold">
+                9.1%
+                <p className="text-xs font-light font-main-body flex items-center"><ArrowUp className="w-3 h-3"/> 2.4%</p>
+            </span>
+            <div className="w-50 h-1 bg-surface-variant rounded-full">
+              <div className="w-1/3 h-1 bg-primary rounded-full"></div>
+            </div>
+          </div>
         </div>
       </div>
     </>
