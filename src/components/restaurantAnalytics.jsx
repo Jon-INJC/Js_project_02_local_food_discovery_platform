@@ -186,8 +186,8 @@ function DashAnalytics() {
         </div>
         <div className="flex flex-col gap-6">
             <div className="flex items-center gap-3">
-                <span className="w-10 h-10 flex items-center justify-center bg-surface-dim rounded-md">
-                    <Heart className="w-5 h-5 text-primary" />
+                <span className="w-10 h-10 flex items-center justify-center bg-surface-dim rounded-lg">
+                    <Heart className="fill-primary stroke-0" />
                 </span>
                 <div className="flex flex-col gap-1">
                     <p className="text-sm text-on-surface">
@@ -199,8 +199,8 @@ function DashAnalytics() {
                 </div>
             </div>
             <div className="flex items-center gap-3">
-                <span className="w-10 h-10 flex items-center justify-center bg-surface-dim rounded-md">
-                    <Bookmark className="w-5 h-5 text-primary" />
+                <span className="w-10 h-10 flex items-center justify-center bg-surface-dim rounded-lg">
+                    <Bookmark className="fill-primary stroke-0" />
                 </span>
                 <div className="flex flex-col gap-1">
                     <p className="text-sm text-on-surface">
@@ -212,8 +212,8 @@ function DashAnalytics() {
                 </div>
             </div>
             <div className="flex items-center gap-3">
-                <span className="w-10 h-10 flex items-center justify-center bg-surface-dim rounded-md">
-                    <Flame className="w-5 h-5 text-primary" />
+                <span className="w-10 h-10 flex items-center justify-center bg-surface-dim rounded-lg">
+                    <Flame className="fill-primary stroke-0" />
                 </span>
                 <div className="flex flex-col gap-1">
                     <p className="text-sm text-on-surface font-bold">

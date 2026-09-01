@@ -2,8 +2,8 @@ import navBarLogo from "../assets/Aura_logo.svg";
 import { LayoutDashboard, UtensilsCrossed, ChartNoAxesCombined, MessageSquareDiff } from "lucide-react";
 //import Overview from "../components/restaurantOverview";
 //import DashMenu from "../components/restaurantMenu";
-//import DashAnalytics from "../components/restaurantAnalytics";
-import DashReview from "../components/restaurantReview";
+import DashAnalytics from "../components/restaurantAnalytics";
+//import DashReview from "../components/restaurantReview";
 function RestaurantDash() {
   return (
     <>
@@ -11,8 +11,8 @@ function RestaurantDash() {
         <section className="min-w-0 flex-1 p-6 md:p-20">
             {/* <Overview /> */}
             {/* <DashMenu /> */}
-            {/* <DashAnalytics /> */}
-            <DashReview />
+            <DashAnalytics />
+            {/* <DashReview /> */}
         </section>
         <aside className="hidden w-65 p-2 border-2 border-outline-variant md:min-h-screen md:flex md:flex-col md:gap-y-6">
           <div className="flex items-center p-4">
