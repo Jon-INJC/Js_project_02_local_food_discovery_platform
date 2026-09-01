@@ -1,3 +1,4 @@
+import { HeartIcon, Lightbulb } from "lucide-react";
 import navBarLogo from "../assets/Aura_logo.svg";
 function DashReview() {
   return (
@@ -165,6 +166,42 @@ function DashReview() {
               <div className="w-[78%] h-1 bg-primary rounded-full"></div>
             </div>
           </div>
+          <div className="flex flex-col gap-4">
+            <span className="text-secondary text-sm font-semibold">
+                COMMON THEMES
+            </span>
+            <div className="flex gap-2">
+                <HeartIcon className="fill-primary stroke-0"/>
+                <div className="flex flex-col gap-0.5">
+                    <p className="text-sm text-on-surface font-medium">Great Flavor Profile</p>
+                    <p className="text-xs text-secondary font-semibold">Mentioned in 42 reviews</p>
+                </div>
+            </div>
+            <div className="flex gap-2">
+                <Lightbulb />
+                <div className="flex flex-col gap-0.5">
+                    <p className="text-sm text-on-surface font-medium">More vegetarian options</p>
+                    <p className="text-xs text-secondary font-semibold">Suggested in 15 reviews</p>
+                </div>
+            </div>
+          </div>
+          </div>
+          <div className="p-6 flex flex-col gap-4 border-2 border-outline-variant">
+            <span className="text-2xl text-on-surface font-bold font-main-header">
+              Most Discussed Items
+            </span>
+            <div className="pb-3 flex items-center justify-between border-b-2 border-outline-variant">
+                <span className="text-sm text-on-surface font-medium">Truffle Risotto</span>
+                <p className="text-xs text-secondary font-semibold px-2 py-1 bg-surface-container rounded-md">38 Comments</p>
+            </div>
+            <div className="pb-3 flex items-center justify-between border-b-2 border-outline-variant">
+                <span className="text-sm text-on-surface font-medium">Lemon Tart</span>
+                <p className="text-xs text-secondary font-semibold px-2 py-1 bg-surface-container rounded-md">27 Comments</p>
+            </div>
+            <div className="pb-3 flex items-center justify-between">
+                <span className="text-sm text-on-surface font-medium">Wagyu Ribeye</span>
+                <p className="text-xs text-secondary font-semibold px-2 py-1 bg-surface-container rounded-md">21 Comments</p>
+            </div>
           </div>
         </div>
       </div>
