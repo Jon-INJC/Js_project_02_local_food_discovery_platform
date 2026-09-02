@@ -74,13 +74,17 @@ function AddMenu() {
                 >
                   Course / Category
                 </label>
-                <input
-                  type="text"
+                
+                <select
                   id="category"
-                  placeholder="e.g., Main Course"
                   required
                   className="border-none outline-none focus:ring-0"
-                />
+                >
+                  <option value="">Select a category</option>
+                  <option value="appetizer">Appetizer</option>
+                  <option value="main-course">Main Course</option>
+                  <option value="dessert">Dessert</option>
+                </select>
               </div>
               <div className="flex flex-col gap-y-2 border-b-2 border-outline-variant">
                 <label
