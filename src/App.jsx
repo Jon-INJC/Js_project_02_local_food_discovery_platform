@@ -16,6 +16,7 @@ import RegStep1 from "./components/restaurantRegStep1.jsx";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -27,13 +28,15 @@ function app() {
         <Route path="explore" element={<Explore />} />
         <Route path="menu" element={<Menu />} />
         <Route path="register" element={<RegisterForm />}>
-          <Route index element={<RegStep1 />} />
+          <Route index element={<Navigate to="step1" />} />
+          <Route path="step1" element={<RegStep1 />} />
           <Route path="step2" element={<RegStep2 />} />
           <Route path="step3" element={<RegStep3 />} />
         </Route>
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="dashboard" element={<RestaurantDash />}>
+          <Route index element={<Navigate to="overview" />} />
           <Route path="overview" element={<Overview />} />
           <Route path="menu" element={<DashMenu />} />
           <Route path="analytics" element={<DashAnalytics />} />
