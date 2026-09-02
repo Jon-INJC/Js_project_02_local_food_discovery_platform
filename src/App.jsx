@@ -1,4 +1,4 @@
-import Home from "./pages/home.jsx"
+import Home from "./pages/home.jsx";
 import Explore from "./pages/explore.jsx";
 import Menu from "./pages/restaurantMenu";
 import RegisterForm from "./pages/registerRestaurant";
@@ -10,30 +10,39 @@ import Overview from "./components/restaurantOverview";
 import DashMenu from "./components/restaurantMenu";
 import DashAnalytics from "./components/restaurantAnalytics";
 import DashReview from "./components/restaurantReview";
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-function app(){
-
+import RegStep3 from "./components/restaurantRegStep3.jsx";
+import RegStep2 from "./components/restaurantRegStep2.jsx";
+import RegStep1 from "./components/restaurantRegStep1.jsx";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+function app() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path="explore" element={<Explore />} />
         <Route path="menu" element={<Menu />} />
-        <Route path="register" element={<RegisterForm />} />
+        <Route path="register" element={<RegisterForm />}>
+          <Route index element={<RegStep1 />} />
+          <Route path="step2" element={<RegStep2 />} />
+          <Route path="step3" element={<RegStep3 />} />
+        </Route>
         <Route path="login" element={<LogIn />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="dashboard" element={<RestaurantDash />} >
+        <Route path="dashboard" element={<RestaurantDash />}>
           <Route path="overview" element={<Overview />} />
           <Route path="menu" element={<DashMenu />} />
           <Route path="analytics" element={<DashAnalytics />} />
           <Route path="review" element={<DashReview />} />
         </Route>
-      </Route>
-    )
+      </Route>,
+    ),
   );
-  return(
-    <RouterProvider router={router} />
-);
+  return <RouterProvider router={router} />;
 }
 
-export default app
+export default app;
