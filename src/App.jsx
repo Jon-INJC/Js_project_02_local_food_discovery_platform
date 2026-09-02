@@ -13,6 +13,7 @@ import DashReview from "./components/restaurantReview";
 import RegStep3 from "./components/restaurantRegStep3.jsx";
 import RegStep2 from "./components/restaurantRegStep2.jsx";
 import RegStep1 from "./components/restaurantRegStep1.jsx";
+import AddMenu from "./components/addMenuForm.jsx";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -41,6 +42,7 @@ function app() {
           <Route path="menu" element={<DashMenu />} />
           <Route path="analytics" element={<DashAnalytics />} />
           <Route path="review" element={<DashReview />} />
+          <Route path="addMenu" element={<AddMenu />} />
         </Route>
       </Route>,
     ),
