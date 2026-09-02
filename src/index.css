@@ -10,7 +10,7 @@
     }
 }
 
-@theme {
+@theme{
 
     --font-main-header: "Playfair Display", serif;
     --font-main-body: "Inter", sans-serif;
@@ -40,4 +40,6 @@
     --color-primary-fixed-dim: oklch(83.629% 0.09437 40.839);
     --color-surface-dim: oklch(88.887% 0.00166 66.423);
     --color-surface-variant-trans: oklch(91.357% 0.00106 11.782 / 0);
+
+    --background-image-dish-img: url('./assets/Placeholder_background.png')
 }
