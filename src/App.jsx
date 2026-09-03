@@ -21,6 +21,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import Profile from "./pages/profile.jsx";
 function app() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -44,6 +45,7 @@ function app() {
           <Route path="review" element={<DashReview />} />
           <Route path="addMenu" element={<AddMenu />} />
         </Route>
+        <Route path="profile" element={<Profile />} />
       </Route>,
     ),
   );
