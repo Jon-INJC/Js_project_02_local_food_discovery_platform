@@ -6,7 +6,7 @@ function Profile() {
       <ProfileNav />
       <main className="bg-on-tertiary mt-10">
         <section className="w-screen max-w-4xl px-6 mx-auto border-b-2 border-solid border-outline-variant pb-10">
-          <div className="container flex items-center gap-6">
+          <div className="container flex flex-col gap-6 md:flex-row md:items-center">
             <img
               src="https://placehold.co/400x400/orange/white"
               alt="Profile"
@@ -64,7 +64,7 @@ function Profile() {
               </a>
             </div>
             <div className="grid grid-cols-12 grid-rows-12 gap-x-6 gap-y-2">
-              <div className="col-span-12 md:col-span-8 md:row-span-12">
+              <div className="col-span-12 row-span-7 md:col-span-8 md:row-span-12">
                 <div className="relative">
                   <div className="p-1 absolute top-5 right-5 bg-surface-bright rounded-md">
                     <Bookmark className="fill-primary stroke-0" />
@@ -84,7 +84,7 @@ function Profile() {
                   </div>
                 </div>
               </div>
-              <div className="col-span-5 row-span-12 md:col-span-4 md:row-span-6 relative">
+              <div className="relative col-span-6 row-span-5 md:col-span-4 md:row-span-6">
                 <div className="p-1 absolute top-5 right-5 bg-surface-bright rounded-md">
                   <Bookmark className="fill-primary stroke-0" />
                 </div>
@@ -102,7 +102,7 @@ function Profile() {
                   </p>
                 </div>
               </div>
-              <div className="col-span-5 row-span-12 md:col-span-4 md:row-span-6 relative">
+              <div className="relative col-span-6 row-span-5 md:col-span-4 md:row-span-6">
                 <div className="p-1 absolute top-5 right-5 bg-surface-bright rounded-md">
                   <Bookmark className="fill-primary stroke-0" />
                 </div>
