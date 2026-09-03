@@ -1,5 +1,6 @@
 import { Bookmark } from "lucide-react";
 import ProfileNav from "../components/profileNav";
+import ProfileFooter from "../components/profileFooter";
 function Profile() {
   return (
     <>
@@ -124,6 +125,7 @@ function Profile() {
           </div>
         </section>
       </main>
+      <ProfileFooter />
     </>
   );
 }
