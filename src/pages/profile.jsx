@@ -1,3 +1,4 @@
+import { Bookmark } from "lucide-react";
 import ProfileNav from "../components/profileNav";
 function Profile() {
   return (
@@ -65,6 +66,9 @@ function Profile() {
             <div className="grid grid-cols-12 grid-rows-12 gap-x-6 gap-y-2">
               <div className="col-span-12 md:col-span-8 md:row-span-12">
                 <div className="relative">
+                  <div className="p-1 absolute top-5 right-5 bg-surface-bright rounded-md">
+                    <Bookmark className="fill-primary stroke-0" />
+                  </div>
                   <img
                     src="https://placehold.co/600x400/orange/white"
                     alt="Restaurant"
@@ -81,34 +85,40 @@ function Profile() {
                 </div>
               </div>
               <div className="col-span-5 row-span-12 md:col-span-4 md:row-span-6 relative">
+                <div className="p-1 absolute top-5 right-5 bg-surface-bright rounded-md">
+                  <Bookmark className="fill-primary stroke-0" />
+                </div>
                 <img
                   src="https://placehold.co/600x500/orange/white"
                   alt="Restaurant"
                   className="w-full h-60 object-cover"
                 />
                 <div className="p-4 flex flex-col gap-2">
-                    <span className="text-lg text-on-surface font-semibold">
-                      Verdant
-                    </span>
-                    <p className="text-secondary text-xs font-medium">
-                      New American • Brooklyn, NY
-                    </p>
-                  </div>
+                  <span className="text-lg text-on-surface font-semibold">
+                    Verdant
+                  </span>
+                  <p className="text-secondary text-xs font-medium">
+                    New American • Brooklyn, NY
+                  </p>
+                </div>
               </div>
               <div className="col-span-5 row-span-12 md:col-span-4 md:row-span-6 relative">
+                <div className="p-1 absolute top-5 right-5 bg-surface-bright rounded-md">
+                  <Bookmark className="fill-primary stroke-0" />
+                </div>
                 <img
                   src="https://placehold.co/600x500/orange/white"
                   alt="Restaurant"
                   className="w-full h-60 object-cover"
                 />
                 <div className="p-4 flex flex-col gap-2">
-                    <span className="text-lg text-on-surface font-semibold">
-                      The Green Room
-                    </span>
-                    <p className="text-secondary text-xs font-medium">
-                      Farm-to-Table • San Francisco, CA
-                    </p>
-                  </div>
+                  <span className="text-lg text-on-surface font-semibold">
+                    The Green Room
+                  </span>
+                  <p className="text-secondary text-xs font-medium">
+                    Farm-to-Table • San Francisco, CA
+                  </p>
+                </div>
               </div>
             </div>
           </div>
