@@ -41,6 +41,9 @@
     --color-surface-dim: oklch(88.887% 0.00166 66.423);
     --color-surface-variant-trans: oklch(91.357% 0.00106 11.782 / 0);
     --color-primary-fixed-dim: oklch(83.629% 0.09437 40.839);
+    --color-tertiary-fixed-dim: oklch(82.781% 0.00638 75.176);
+    --color-inverse-surface: oklch(30.956% 0.0018 286.009);
+    --color-secondary-fixed-dim: oklch(82.787% 0.00257 47.298);
 
     --background-image-dish-img: url('./assets/Placeholder_background.png')
 }
