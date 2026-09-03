@@ -3,7 +3,7 @@ import navBarLogo from "../assets/Aura_logo_variant_3.svg";
 function ProfileNav() {
   return (
     <header className="w-screen bg-surface-bright">
-      <nav className="relative container mx-auto p-6 max-w-4xl">
+      <nav className="relative container mx-auto p-6 max-w-4xl border-b-2 border-outline-variant">
         <div className="flex items-center justify-between">
           <div>
             <img src={navBarLogo} alt="Aura logo" />
