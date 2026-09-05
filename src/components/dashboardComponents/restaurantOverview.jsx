@@ -1,7 +1,7 @@
-import navBarLogo from "../assets/Aura_logo.svg";
+import navBarLogo from "../../assets/Aura_logo.svg";
 import { Plus } from "lucide-react";
-import OverviewHero from "./dashboardComponents/overviewComponents/overviewHero";
-import ActiveMenu from "./dashboardComponents/overviewComponents/activeMenu";
+import OverviewHero from "./overviewComponents/overviewHero";
+import ActiveMenu from "./overviewComponents/activeMenu";
 function Overview() {
   return (
     <>

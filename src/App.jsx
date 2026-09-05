@@ -6,7 +6,7 @@ import LogIn from "./pages/logIn";
 import SignUp from "./pages/signUp";
 import RestaurantDash from "./pages/restaurantDash";
 import RootLayout from "./layout/rootLayout";
-import Overview from "./components/restaurantOverview";
+import Overview from "./components/dashboardComponents/restaurantOverview.jsx";
 import DashMenu from "./components/restaurantMenu";
 import DashAnalytics from "./components/restaurantAnalytics";
 import DashReview from "./components/restaurantReview";
