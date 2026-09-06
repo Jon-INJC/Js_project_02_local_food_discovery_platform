@@ -21,8 +21,8 @@ function CuratedExperiences() {
   );
 }
 
-function CuratedCard(params) {
-    const { image, name, cuisine, rating } = params;
+function CuratedCard(props) {
+    const { image, name, cuisine, rating } = props;
     return (
         <div className=" relative flex flex-col justify-center max-w-1/2 md:max-w-1/3">
           <div>

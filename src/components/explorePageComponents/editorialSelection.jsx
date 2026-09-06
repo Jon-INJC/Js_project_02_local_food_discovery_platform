@@ -30,7 +30,7 @@ function EditorialSelection() {
   );
 }
 
-function EditorialSelectionCard(params) {
+function EditorialSelectionCard(props) {
   const {
     image,
     title,
@@ -39,7 +39,7 @@ function EditorialSelectionCard(params) {
     priceRange,
     dishImage,
     signatureDish,
-  } = params;
+  } = props;
   return (
     <div className="flex flex-col items-start">
       <img src={image} alt="" className="max-w-75 max-h-100 object-cover" />

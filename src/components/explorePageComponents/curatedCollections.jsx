@@ -27,8 +27,8 @@ function CuratedCollections() {
   );
 }
 
-function CuratedCollectionsCard(params) {
-    const { image, title, spots } = params;
+function CuratedCollectionsCard(props) {
+    const { image, title, spots } = props;
     return (
         <div className="flex flex-col items-start shrink-0">
           <img
