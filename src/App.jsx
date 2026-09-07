@@ -8,7 +8,7 @@ import RestaurantDash from "./pages/restaurantDash";
 import RootLayout from "./layout/rootLayout";
 import Overview from "./components/dashboardComponents/restaurantOverview.jsx";
 import DashMenu from "./components/dashboardComponents/restaurantMenu.jsx";
-import DashAnalytics from "./components/restaurantAnalytics";
+import DashAnalytics from "./components/dashboardComponents/restaurantAnalytics.jsx";
 import DashReview from "./components/restaurantReview";
 import RegStep3 from "./components/restaurantRegStep3.jsx";
 import RegStep2 from "./components/restaurantRegStep2.jsx";
