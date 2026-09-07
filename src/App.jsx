@@ -13,7 +13,7 @@ import DashReview from "./components/dashboardComponents/restaurantReview.jsx";
 import RegStep3 from "./components/restaurantRegStep3.jsx";
 import RegStep2 from "./components/restaurantRegStep2.jsx";
 import RegStep1 from "./components/restaurantRegStep1.jsx";
-import AddMenu from "./components/addMenuForm.jsx";
+import AddMenu from "./components/dashboardComponents/addMenuForm.jsx";
 import {
   createBrowserRouter,
   createRoutesFromElements,
