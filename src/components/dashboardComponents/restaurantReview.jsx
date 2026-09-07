@@ -1,5 +1,5 @@
 import { HeartIcon, Lightbulb } from "lucide-react";
-import navBarLogo from "../assets/Aura_logo.svg";
+import navBarLogo from "../../assets/Aura_logo.svg";
 function DashReview() {
   return (
     <>

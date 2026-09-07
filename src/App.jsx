@@ -9,7 +9,7 @@ import RootLayout from "./layout/rootLayout";
 import Overview from "./components/dashboardComponents/restaurantOverview.jsx";
 import DashMenu from "./components/dashboardComponents/restaurantMenu.jsx";
 import DashAnalytics from "./components/dashboardComponents/restaurantAnalytics.jsx";
-import DashReview from "./components/restaurantReview";
+import DashReview from "./components/dashboardComponents/restaurantReview.jsx";
 import RegStep3 from "./components/restaurantRegStep3.jsx";
 import RegStep2 from "./components/restaurantRegStep2.jsx";
 import RegStep1 from "./components/restaurantRegStep1.jsx";
