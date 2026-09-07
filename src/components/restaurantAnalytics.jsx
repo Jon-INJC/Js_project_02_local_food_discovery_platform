@@ -1,7 +1,7 @@
 import { Eye, ArrowUp, Heart, Bookmark, Flame } from "lucide-react";
 import navBarLogo from "../assets/Aura_logo.svg";
-import LineGraph from "./analyticsLineGraph";
-import PieGraph from "./analyticsPieChart";
+import LineGraph from "./dashboardComponents/analyticsComponents/analyticsLineGraph";
+import PieGraph from "./dashboardComponents/analyticsComponents/analyticsPieChart";
 function DashAnalytics() {
   return (
     <>
