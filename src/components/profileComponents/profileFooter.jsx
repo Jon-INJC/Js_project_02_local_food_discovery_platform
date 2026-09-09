@@ -1,4 +1,4 @@
-import footerLogo from "../assets/Aura_logo_variant_3.svg";
+import footerLogo from "../../assets/Aura_logo_variant_3.svg";
 function ProfileFooter() {
   return (
     <footer className="w-screen p-6 bg-inverse-surface border-t-2 border-outline">

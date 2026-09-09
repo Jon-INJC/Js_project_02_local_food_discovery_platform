@@ -1,5 +1,5 @@
 import { Settings } from "lucide-react";
-import navBarLogo from "../assets/Aura_logo_variant_3.svg";
+import navBarLogo from "../../assets/Aura_logo_variant_3.svg";
 function ProfileNav() {
   return (
     <header className="w-screen bg-surface-bright">
