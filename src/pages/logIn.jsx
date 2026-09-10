@@ -1,6 +1,16 @@
 import AltFooter from "../components/altFooter";
 import { ArrowRight } from "lucide-react";
+import { useForm } from "react-hook-form";
+import Error from "../components/error";
 function LogIn() {
+
+  const { register, handleSubmit, formState } = useForm();
+  const { errors } = formState;
+
+  const onSubmit = (data) => {
+    console.log("Form Submitted", data)
+  }
+
   return (
     <>
       <main className="bg-surface-bright p-13">
@@ -17,8 +27,8 @@ function LogIn() {
                 Continue your culinary journey.
               </p>
             </div>
-            <form className="w-[80%] flex flex-col p-8 gap-y-8 bg-on-tertiary border-2 border-outline-variant">
-              <div className="flex flex-col gap-y-2 border-b-2 border-outline-variant">
+            <form onSubmit={handleSubmit(onSubmit)} noValidate className="w-[80%] flex flex-col p-8 gap-y-8 bg-on-tertiary border-2 border-outline-variant">
+              <div className="flex flex-col gap-y-2">
                 <label
                   htmlFor="email"
                   className="text-sm text-on-surface-variant font-bold"
@@ -30,10 +40,21 @@ function LogIn() {
                   id="email"
                   placeholder="Enter your email"
                   required
-                  className="border-none outline-none focus:ring-0"
+                  {...register("email" , {
+                    pattern:{
+                      value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                      message:"Invalid Email Format"
+                    },
+                    required:{
+                      value: true,
+                      message: "Email is Required"
+                    }
+                  })}
+                  className="border-b-2 border-outline-variant outline-none focus:ring-0"
                 />
+                <Error text={errors.email?.message} />
               </div>
-              <div className="flex flex-col gap-y-2 border-b-2 border-outline-variant">
+              <div className="flex flex-col gap-y-2">
                 <div className="flex justify-between items-center">
                   <label
                     htmlFor="password"
@@ -51,8 +72,19 @@ function LogIn() {
                   id="dashPassword"
                   placeholder="Enter your password"
                   required
-                  className="border-none outline-none focus:ring-0"
+                  {...register("dashPassword", {
+                    required:{
+                      value:true,
+                      message:"Password is Required"
+                    },
+                    minLength:{
+                      value: 8,
+                      message: "Password Can't be Lessthan 8 Characters"
+                    }
+                  })}
+                  className="border-b-2 border-outline-variant outline-none focus:ring-0"
                 />
+                <Error text={errors.dashPassword?.message} />
               </div>
               <button
                 type="submit"
