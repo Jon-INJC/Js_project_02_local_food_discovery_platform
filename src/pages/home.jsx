@@ -5,9 +5,15 @@ import HeroTrending from "../components/homePageComponents/heroTranding";
 import SearchEngine from "../components/homePageComponents/searchEngine";
 import CuratedExperiences from "../components/homePageComponents/curatedExperiences";
 function home() {
+  const links = [
+    { value: "Explore", path: "/explore" },
+    { value: "Cafes", path: "/Cafes" },
+    { value: "Fine Dining", path: "/Fine-Dining" },
+    { value: "Curated", path: "/curated" },
+  ];
   return (
     <>
-      <Nav />
+      <Nav links={links} />
       <main className="bg-on-tertiary">
         <section id="hero" className="w-screen max-w-4xl px-6 mx-auto">
           <div className="container flex flex-col-reverse items-center mx-auto mt-10 space-y-0 md:space-y-0 md:flex-row md:space-x-3">
