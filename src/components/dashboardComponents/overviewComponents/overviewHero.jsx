@@ -1,5 +1,6 @@
 import React from "react";
 import { Heart, Plus, Star, Utensils } from "lucide-react";
+import { NavLink } from "react-router-dom";
 function OverviewHero() {
   return (
     <div className="container mt-7 flex flex-col gap-y-15">
@@ -12,13 +13,13 @@ function OverviewHero() {
             Here is an overview of your restaurant's performance today.
           </p>
         </div>
-        <button
-          type="button"
+        <NavLink
+          to="/dashboard/addmenu"
           className=" hidden text-xs justify-center items-center px-3 py-3 border text-on-tertiary bg-primary hover:cursor-pointer md:flex"
         >
           <Plus className="w-5 h-5" />
           Add Menu Item
-        </button>
+        </NavLink>
       </div>
       <div className="w-full flex gap-x-6">
         <OverviewInfoCard title="TOTAL MENU ITEMS" value="42" icon={Utensils} />
