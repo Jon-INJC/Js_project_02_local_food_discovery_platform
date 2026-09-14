@@ -1,4 +1,13 @@
+import { useForm } from "react-hook-form";
+import Error from "./error";
 function RegStep3() {
+  const { register, handleSubmit, formState } = useForm();
+  const { errors } = formState;
+
+  const onSubmit = (data) => {
+    console.log("Form Submitted.", data);
+  };
+
   return (
     <>
       <div className="container max-w-175 mx-auto pt-10 flex flex-col gap-y-4 items-center">
@@ -17,8 +26,12 @@ function RegStep3() {
             stage.
           </p>
         </div>
-        <form className="w-[90%] flex flex-col p-6 gap-y-5 bg-on-tertiary border-2 border-outline-variant">
-          <div className="flex flex-col gap-y-2 border-b-2 border-outline-variant">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          className="w-[90%] flex flex-col p-6 gap-y-5 bg-on-tertiary border-2 border-outline-variant"
+        >
+          <div className="flex flex-col gap-y-2">
             <label
               htmlFor="ownerName"
               className="text-sm text-on-surface-variant font-bold"
@@ -30,10 +43,17 @@ function RegStep3() {
               id="ownerName"
               placeholder="Jane Doe"
               required
-              className="border-none outline-none focus:ring-0"
+              {...register("ownerName", {
+                required: {
+                  value: true,
+                  message: "Owner Name is Required",
+                },
+              })}
+              className="border-b-2 border-outline-variant outline-none focus:ring-0"
             />
+            <Error text={errors.ownerName?.message} />
           </div>
-          <div className="flex flex-col gap-y-2 border-b-2 border-outline-variant">
+          <div className="flex flex-col gap-y-2">
             <label
               htmlFor="dashPassword"
               className="text-sm text-on-surface-variant font-bold"
@@ -45,8 +65,15 @@ function RegStep3() {
               id="dashPassword"
               placeholder="*******"
               required
-              className="border-none outline-none focus:ring-0"
+              {...register("dashPassword", {
+                required: {
+                  value: true,
+                  message: "Password is Required",
+                },
+              })}
+              className="border-b-2 border-outline-variant outline-none focus:ring-0"
             />
+            <Error text={errors.dashPassword?.message} />
           </div>
           <div className="flex flex-col gap-y-2">
             <label
@@ -59,7 +86,6 @@ function RegStep3() {
               type="text"
               id="operationalHours"
               placeholder="e.g., Tue-Sun, 5 PM - 11 PM"
-              required
               className="border-b-2 border-outline-variant outline-none focus:ring-0"
             />
             <p className="text-xs text-secondary">
@@ -72,8 +98,11 @@ function RegStep3() {
               htmlFor="termsAndConditions"
               className="text-sm text-on-surface-variant font-bold"
             >
-              I agree to the <a href="http://" className="text-primary">Terms & Conditions</a> and confirm the information
-              provided is accurate.
+              I agree to the{" "}
+              <a href="http://" className="text-primary">
+                Terms & Conditions
+              </a>{" "}
+              and confirm the information provided is accurate.
             </label>
           </div>
           <div className="flex justify-between pt-6">

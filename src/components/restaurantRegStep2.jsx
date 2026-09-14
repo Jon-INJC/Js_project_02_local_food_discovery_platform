@@ -1,30 +1,16 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
 import { CloudUpload, Camera } from "lucide-react";
+import { Controller, useForm } from "react-hook-form";
+import Error from "./error";
 function RegStep2() {
-  const logoDropzone = useDropzone({
-    accept: {
-      "image/png": [".png"],
-      "image/svg+xml": [".svg"],
-    },
-    maxFiles: 1,
-    maxSize: 5 * 1024 * 1024,
-    onDrop: (acceptedFiles) => {
-      console.log("Logo:", acceptedFiles);
-    },
-  });
+  
+  const { control, register, handleSubmit, formState } = useForm();
+  const { errors } = formState;
 
-  const coverDropzone = useDropzone({
-    accept: {
-      "image/jpeg": [".jpg", ".jpeg"],
-      "image/png": [".png"],
-    },
-    maxFiles: 1,
-    maxSize: 10 * 1024 * 1024,
-    onDrop: (acceptedFiles) => {
-      console.log("Cover:", acceptedFiles);
-    },
-  });
+  const onSubmit = (data) => {
+    console.log("Form submitted.", data);
+  };
 
   return (
     <>
@@ -46,7 +32,8 @@ function RegStep2() {
           </p>
         </div>
         <form
-          action=""
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
           className="w-[90%] flex flex-col p-6 gap-y-5 bg-on-tertiary border-2 border-outline-variant"
         >
           <section className="flex flex-col gap-y-2">
@@ -58,20 +45,23 @@ function RegStep2() {
               A high-contrast, scalable vector or high-res PNG (min 1024×1024)
               with a transparent background.
             </p>
-            <div
-              {...logoDropzone.getRootProps()}
-              className="h-40 border border-dashed border-primary/40 flex flex-col items-center justify-center gap-y-2 cursor-pointer rounded-md hover:bg-surface-variant/20 transition-colors"
-            >
-              <input {...logoDropzone.getInputProps()} />
-
-              <CloudUpload className="w-8 h-8 text-secondary" />
-
-              <p className="text-sm font-medium">
-                Click to upload or drag and drop
-              </p>
-
-              <p className="text-xs text-on-surface-variant">PNG, SVG (max. 5MB)</p>
-            </div>
+            <Controller
+              name="restaurantLogo"
+              control={control}
+              rules={{ required: "Restaurant Logo Is Required" }}
+              render={({ field }) => (
+                <DropzoneInput
+                  value={field.value}
+                  onChange={field.onChange}
+                  accept={{ "image/png": [".png"], "image/svg+xml": [".svg"] }}
+                  maxSize={5 * 1024 * 1024}
+                  icon={CloudUpload}
+                  label="Click to upload or drag and drop"
+                  helperText="PNG, SVG (max. 5MB)"
+                />
+              )}
+            />
+            <Error text={errors.restaurantLogo?.message} />
           </section>
           <section className="flex flex-col gap-y-2">
             <h2 className="text-2xl font-bold font-main-header">
@@ -83,20 +73,26 @@ function RegStep2() {
               captivating, beautifully lit photograph of your space or signature
               dish. Avoid text overlays or collages.
             </p>
-            <div
-              {...coverDropzone.getRootProps()}
-              className="h-40 border border-dashed border-primary/40 flex flex-col items-center justify-center gap-y-2 cursor-pointer rounded-md hover:bg-surface-variant/20 transition-colors"
-            >
-              <input {...coverDropzone.getInputProps()} />
-
-              <Camera className="w-8 h-8 text-secondary" />
-
-              <p className="text-sm font-medium">Upload Cover Image</p>
-
-              <p className="text-xs text-on-surface-variant">
-                High-res JPG or PNG, horizontal orientation preferred
-              </p>
-            </div>
+            <Controller
+              name="coverImage"
+              control={control}
+              rules={{ required: "Restaurant Cover Image Is Required" }}
+              render={({ field }) => (
+                <DropzoneInput
+                  value={field.value}
+                  onChange={field.onChange}
+                  accept={{
+                    "image/jpeg": [".jpg", ".jpeg"],
+                    "image/png": [".png"],
+                  }}
+                  maxSize={10 * 1024 * 1024}
+                  icon={Camera}
+                  label="Upload Cover Image"
+                  helperText="High-res JPG or PNG, horizontal orientation preferred"
+                />
+              )}
+            />
+            <Error text={errors.coverImage?.message} />
           </section>
 
           <section className="border-t border-outline-variant pt-8 flex flex-col gap-y-6">
@@ -119,8 +115,20 @@ function RegStep2() {
                 <input
                   type="email"
                   placeholder="manager@restaurant.com"
+                  {...register("email", {
+                    pattern: {
+                      value:
+                        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                      message: "Invalid Email Format",
+                    },
+                    required: {
+                      value: true,
+                      message: "Email is Required",
+                    },
+                  })}
                   className="border-b border-outline-variant outline-none focus:border-primary py-2"
                 />
+                <Error text={errors.email?.message} />
               </div>
 
               <div className="flex flex-col gap-y-2">
@@ -130,9 +138,22 @@ function RegStep2() {
 
                 <input
                   type="tel"
-                  placeholder="+1 (555) 000-0000"
+                  id="phone"
+                  placeholder="+251 911 234 567"
+                  inputmode="tel"
+                  {...register("phone", {
+                    pattern: {
+                      value: /^(\+251\s?|0)[79]\d{8}$/,
+                      message: "Invalid Phone Format",
+                    },
+                    required: {
+                      value: true,
+                      message: "Phone is Required",
+                    },
+                  })}
                   className="border-b border-outline-variant outline-none focus:border-primary py-2"
                 />
+                <Error text={errors.phone?.message} />
               </div>
             </div>
           </section>
@@ -155,6 +176,41 @@ function RegStep2() {
         </form>
       </div>
     </>
+  );
+}
+
+function DropzoneInput({
+  value,
+  onChange,
+  accept,
+  maxFiles,
+  maxSize,
+  icon: Icon,
+  label,
+  helperText,
+}) {
+  const { getRootProps, getInputProps } = useDropzone({
+    accept,
+    maxFiles,
+    maxSize,
+    onDrop: (acceptedFiles) => {
+      // Store the file in React Hook Form state
+      if (acceptedFiles.length > 0) {
+        onChange(acceptedFiles[0]);
+      }
+    },
+  });
+
+  return (
+    <div
+      {...getRootProps()}
+      className="h-40 border border-dashed border-primary/40 flex flex-col items-center justify-center gap-y-2 cursor-pointer rounded-md hover:bg-surface-variant/20 transition-colors"
+    >
+      <input {...getInputProps()} />
+      <Icon className="w-8 h-8 text-secondary" />
+      <p className="text-sm font-medium">{value ? value.name : label}</p>
+      <p className="text-xs text-on-surface-variant">{helperText}</p>
+    </div>
   );
 }
 
