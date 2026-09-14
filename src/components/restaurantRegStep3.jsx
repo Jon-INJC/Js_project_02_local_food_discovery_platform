@@ -93,7 +93,13 @@ function RegStep3() {
             </p>
           </div>
           <div className="flex gap-x-2 items-center">
-            <input type="checkbox" id="termsAndConditions" required />
+            <input
+              type="checkbox"
+              id="termsAndConditions"
+              {...register("termsAndConditions", {
+                required: "You must accept the terms.",
+              })}
+            />
             <label
               htmlFor="termsAndConditions"
               className="text-sm text-on-surface-variant font-bold"
