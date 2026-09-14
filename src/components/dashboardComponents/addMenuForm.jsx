@@ -152,7 +152,7 @@ function AddMenu() {
               <span className="text-sm text-on-surface-variant font-semibold">
                 Designate as House Special
               </span>
-              <button className="w-12.5 h-5 bg-surface-container-highest rounded-full cursor-pointer shadow-md relative">
+              <button type="button" className="w-12.5 h-5 bg-surface-container-highest rounded-full cursor-pointer shadow-md relative">
                 <div className="w-4 h-4 bg-on-tertiary rounded-full absolute left-1 top-1/2 -translate-y-1/2"></div>
               </button>
             </div>
@@ -160,7 +160,7 @@ function AddMenu() {
               <span className="text-sm text-on-surface-variant font-semibold">
                 Feature as Today's Special
               </span>
-              <button className="w-12.5 h-5 bg-surface-container-highest rounded-full cursor-pointer shadow-md relative">
+              <button type="button" className="w-12.5 h-5 bg-surface-container-highest rounded-full cursor-pointer shadow-md relative">
                 <div className="w-4 h-4 bg-on-tertiary rounded-full absolute left-1 top-1/2 -translate-y-1/2"></div>
               </button>
             </div>
