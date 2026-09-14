@@ -1,4 +1,5 @@
 import { Plus } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 function DashMenuHero() {
   return (
@@ -12,13 +13,13 @@ function DashMenuHero() {
             Manage your active menu items, prices, and categories.
           </p>
         </div>
-        <button
-          type="button"
+        <NavLink
+          to="/dashboard/addmenu"
           className=" hidden text-xs justify-center items-center px-3 py-2 border text-on-tertiary bg-primary hover:cursor-pointer md:flex"
         >
           <Plus className="w-5 h-5" />
           Add Menu Item
-        </button>
+        </NavLink>
       </div>
     </div>
   );

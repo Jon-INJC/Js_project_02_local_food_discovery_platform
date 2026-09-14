@@ -1,5 +1,7 @@
+import { NavLink } from "react-router-dom";
 import navBarLogo from "../assets/Aura_logo.svg";
-function Nav() {
+function Nav({ links = [] }) {
+
   return (
     <header className="w-screen bg-surface-bright">
       <nav className="relative container mx-auto p-6 max-w-4xl">
@@ -9,35 +11,23 @@ function Nav() {
           </div>
 
           <div className="hidden md:flex space-x-6">
-            <a
-              href="#"
-              className="text-secondary hover:text-on-surface hover:underline hover:-mt-1 decoration-primary"
-            >
-              Explore
-            </a>
-            <a
-              href="#"
-              className="text-secondary hover:text-on-surface hover:underline hover:-mt-1 decoration-primary"
-            >
-              Cafes
-            </a>
-            <a
-              href="#"
-              className="text-secondary hover:text-on-surface hover:underline hover:-mt-1 decoration-primary"
-            >
-              Fine Dining
-            </a>
-            <a
-              href="#"
-              className="text-secondary hover:text-on-surface hover:underline hover:-mt-1 decoration-primary"
-            >
-              Curated
-            </a>
+            {links.map((link) => {
+              return (
+                <NavLink
+                  to={link.path}
+                  className="text-secondary hover:text-on-surface hover:underline hover:-mt-1 decoration-primary"
+                >
+                  {link.value}
+                </NavLink>
+              );
+            })}
           </div>
-          <a
-            href=""
-            className="hidden p-1 px-4 pt-1 text-on-tertiary bg-secondary rounded-sm baseline hover:-mt-1 md:block"
-          >LIST YOUR RESTAURANT</a>
+          <NavLink
+            to="/register/step1"
+            className="hidden p-1 px-4 pt-1 text-on-tertiary bg-secondary rounded-sm baseline hover:-translate-y-1 md:block"
+          >
+            LIST YOUR RESTAURANT
+          </NavLink>
         </div>
       </nav>
     </header>

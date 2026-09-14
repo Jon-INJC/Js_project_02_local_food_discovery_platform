@@ -110,10 +110,10 @@ function RegStep1() {
               About the Restaurant
             </label>
             <textarea
-              name="discription"
               id="discription"
               maxLength={300}
               rows={3}
+              {...register("discription")}
               className="border-2 border-outline-variant outline-none focus:ring-0"
             ></textarea>
             <p className="text-xs text-secondary self-end">

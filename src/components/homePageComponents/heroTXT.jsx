@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 function HeroTXT() {
   return (
     <div className="flex flex-col mb-32 space-y-9 md:w-6/10">
@@ -11,18 +13,18 @@ function HeroTXT() {
       </p>
 
       <div className="flex justify-center md:justify-start space-x-4">
-        <a
-          href=""
-          className="py-2 px-4 text-on-tertiary text-sm bg-secondary rounded-sm baseline hover:-mt-1"
+        <NavLink
+          to="/explore"
+          className="py-2 px-4 text-on-tertiary text-sm bg-secondary rounded-sm baseline hover:-translate-y-1"
         >
           EXPLORE MENUS
-        </a>
-        <a
-          href=""
-          className="py-2 px-4 text-secondary text-sm border-2 border-solid border-secondary rounded-sm baseline font-main-header hover:-mt-1"
+        </NavLink>
+        <NavLink
+          to="/register/step1"
+          className="py-2 px-4 text-secondary text-sm border-2 border-solid border-secondary rounded-sm baseline font-main-header hover:-translate-y-1"
         >
           List Your Restaurant
-        </a>
+        </NavLink>
       </div>
     </div>
   );

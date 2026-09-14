@@ -5,9 +5,15 @@ import CuratedCollections from "../components/explorePageComponents/curatedColle
 import EditorialSelection from "../components/explorePageComponents/editorialSelection";
 
 function Explore() {
+  const links = [
+    { value: "Home", path: "/" },
+    { value: "Cafes", path: "/Cafes" },
+    { value: "Fine Dining", path: "/Fine-Dining" },
+    { value: "Curated", path: "/curated" },
+  ];
   return (
     <>
-      <Nav />
+      <Nav links={links} />
       <main className="bg-on-tertiary">
         <section id="discover" className="w-screen max-w-4xl px-6 mx-auto">
           <ExploreHero />
