@@ -1,11 +1,15 @@
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import Error from "./error";
+import { useNavigate } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 function RegStep3() {
-  const { register, handleSubmit, formState } = useForm();
+
+  const navigate = useNavigate();
+  const { register, handleSubmit, formState } = useFormContext();
   const { errors } = formState;
 
   const onSubmit = (data) => {
-    console.log("Form Submitted.", data);
+    console.log("Complete registration:", data);
   };
 
   return (
@@ -97,7 +101,7 @@ function RegStep3() {
               type="checkbox"
               id="termsAndConditions"
               {...register("termsAndConditions", {
-                required: "You must accept the terms.",
+                required: "You must accept the terms and conditions",
               })}
             />
             <label
@@ -114,16 +118,17 @@ function RegStep3() {
           <div className="flex justify-between pt-6">
             <button
               type="button"
-              className="px-8 py-4 border border-secondary font-bold font-main-header"
+              onClick={() => navigate("/register/step2")}
+              className="px-4 py-2 border border-secondary font-bold font-main-header"
             >
               Back
             </button>
 
             <button
               type="submit"
-              className="px-10 py-4 bg-secondary text-on-tertiary font-bold font-main-header"
+              className="flex items-center gap-2 px-4 py-2 bg-secondary text-on-tertiary cursor-pointer"
             >
-              Continue
+              Continue <ArrowRight />
             </button>
           </div>
         </form>

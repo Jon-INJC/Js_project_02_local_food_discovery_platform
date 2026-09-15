@@ -1,15 +1,28 @@
 import React from "react";
 import { useDropzone } from "react-dropzone";
-import { CloudUpload, Camera } from "lucide-react";
-import { Controller, useForm } from "react-hook-form";
+import { CloudUpload, Camera, ArrowRight } from "lucide-react";
+import { Controller, useFormContext } from "react-hook-form";
 import Error from "./error";
+import { useNavigate } from "react-router-dom";
 function RegStep2() {
-  
-  const { control, register, handleSubmit, formState } = useForm();
-  const { errors } = formState;
+  const {
+    control,
+    register,
+    trigger,
+    formState: { errors },
+  } = useFormContext();
 
-  const onSubmit = (data) => {
-    console.log("Form submitted.", data);
+  const navigate = useNavigate();
+
+  const handleNext = async () => {
+    const isValid = await trigger([
+      "restaurantLogo",
+      "coverImage",
+      "email",
+      "phone",
+    ]);
+    if (!isValid) return;
+    navigate("/register/step3");
   };
 
   return (
@@ -32,7 +45,6 @@ function RegStep2() {
           </p>
         </div>
         <form
-          onSubmit={handleSubmit(onSubmit)}
           noValidate
           className="w-[90%] flex flex-col p-6 gap-y-5 bg-on-tertiary border-2 border-outline-variant"
         >
@@ -161,16 +173,18 @@ function RegStep2() {
           <div className="flex justify-between pt-6">
             <button
               type="button"
-              className="px-8 py-4 border border-secondary font-bold font-main-header"
+              onClick={() => navigate("/register/step1")}
+              className="px-4 py-2 border border-secondary font-bold font-main-header"
             >
               Back
             </button>
 
             <button
-              type="submit"
-              className="px-10 py-4 bg-secondary text-on-tertiary font-bold font-main-header"
+              type="button"
+              onClick={handleNext}
+              className="flex items-center gap-2 px-4 py-2 bg-secondary text-on-tertiary cursor-pointer"
             >
-              Continue
+              Continue <ArrowRight />
             </button>
           </div>
         </form>
