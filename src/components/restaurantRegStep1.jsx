@@ -1,11 +1,25 @@
-import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useFormContext } from "react-hook-form";
 import Error from "./error";
+import { ArrowRight } from "lucide-react";
 function RegStep1() {
-  const { register, handleSubmit, formState } = useForm();
-  const { errors } = formState;
+  const {
+    register,
+    trigger,
+    formState: { errors },
+  } = useFormContext();
 
-  const onSubmit = (data) => {
-    console.log("Form is Submitted", data);
+  const navigate = useNavigate();
+
+  const handleNext = async () => {
+    const isValid = await trigger([
+      "restaurantName",
+      "category",
+      "location",
+      "description",
+    ]);
+    if (!isValid) return;
+    navigate("/register/step2");
   };
 
   return (
@@ -27,7 +41,6 @@ function RegStep1() {
           </p>
         </div>
         <form
-          onSubmit={handleSubmit(onSubmit)}
           noValidate
           className="w-[90%] flex flex-col p-6 gap-y-5 bg-on-tertiary border-2 border-outline-variant"
         >
@@ -104,16 +117,21 @@ function RegStep1() {
           </div>
           <div className="flex flex-col gap-y-2">
             <label
-              htmlFor="discription"
+              htmlFor="description"
               className="text-sm text-on-surface-variant font-bold"
             >
               About the Restaurant
             </label>
             <textarea
-              id="discription"
+              id="description"
               maxLength={300}
               rows={3}
-              {...register("discription")}
+              {...register("description", {
+                maxLength: {
+                  value: 300,
+                  message: "Description cannot exceed 300 characters",
+                },
+              })}
               className="border-2 border-outline-variant outline-none focus:ring-0"
             ></textarea>
             <p className="text-xs text-secondary self-end">
@@ -121,8 +139,12 @@ function RegStep1() {
             </p>
           </div>
           <div className="py-6 flex items-end justify-end">
-            <button className="px-4 py-2 bg-secondary text-on-tertiary cursor-pointer">
-              Continue <i class="fa-solid fa-arrow-right"></i>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="flex items-center gap-2 px-4 py-2 bg-secondary text-on-tertiary cursor-pointer"
+            >
+              Continue <ArrowRight />
             </button>
           </div>
         </form>

@@ -31,7 +31,6 @@ function app() {
         <Route path="explore" element={<Explore />} />
         <Route path="menu" element={<Menu />} />
         <Route path="register" element={<RegisterForm />}>
-          <Route index element={<Navigate to="step1" />} />
           <Route path="step1" element={<RegStep1 />} />
           <Route path="step2" element={<RegStep2 />} />
           <Route path="step3" element={<RegStep3 />} />

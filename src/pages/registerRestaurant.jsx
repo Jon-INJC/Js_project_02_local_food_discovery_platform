@@ -1,8 +1,14 @@
 import { Outlet } from "react-router-dom";
+import { FormProvider, useForm } from "react-hook-form";
 import navBarLogo from "../assets/Aura_logo.svg";
 function RegisterForm() {
+
+  const methods = useForm({
+    mode: "onTouched",
+  });
+
   return (
-    <>
+    <FormProvider {...methods}>
       <header className="w-screen px-6 bg-surface-bright border-2 border-outline-variant">
         <div className="container max-w-4xl mx-auto py-3 flex justify-between items-center">
           <div>
@@ -21,7 +27,7 @@ function RegisterForm() {
       <footer className="w-full py-3 flex justify-center items-center text-sm text-secondary">
         <p>© 2024 AURA EDITORIAL. SECURE LISTING PORTAL.</p>
       </footer>
-    </>
+    </FormProvider>
   );
 }
 
