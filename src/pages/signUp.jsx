@@ -3,7 +3,7 @@ import { ArrowRight, Eye } from "lucide-react";
 import { useForm } from "react-hook-form";
 import Error from "../components/error";
 import { useContext } from "react";
-import { UserContext } from "../context API/userContextProvider";
+import { UserContext } from "../context_API/userContextProvider";
 
 function SignUp() {
   const { setUserValue } = useContext(UserContext);

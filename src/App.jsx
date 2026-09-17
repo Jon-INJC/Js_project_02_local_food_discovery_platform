@@ -22,7 +22,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Profile from "./pages/profile.jsx";
-import { UserContextProvider } from "./context API/userContextProvider.jsx";
+import { UserContextProvider } from "./context_API/userContextProvider.jsx";
 function app() {
   const router = createBrowserRouter(
     createRoutesFromElements(
