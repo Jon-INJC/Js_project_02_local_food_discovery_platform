@@ -3,14 +3,33 @@ import { ArrowRight } from "lucide-react";
 import { useForm } from "react-hook-form";
 import Error from "../components/error";
 import { useContext } from "react";
-import { UserContext } from "../context API/userContextProvider";
+import { UserContext } from "../context_API/userContextProvider";
+import { getUsers } from "../api/authAPI";
 function LogIn() {
   const { setUserValue } = useContext(UserContext);
-  const { register, handleSubmit, formState } = useForm();
+  const { register, handleSubmit, setError, formState } = useForm();
   const { errors } = formState;
 
-  const onSubmit = (data) => {
-    setUserValue(data);
+  const onSubmit = async (data) => {
+    try {
+      const userData = await getUsers(data.email);
+      if (!userData) {
+        // Set error on the email field specifically
+        setError("email", {
+          type: "manual",
+          message: "No account found with this email address.",
+        });
+        return;
+      }
+
+      setUserValue(userData);
+      console.log("Logged in user:", userData);
+    } catch (err) {
+      setError("root", {
+        type: "manual",
+        message: err.message || "An unexpected error occurred",
+      });
+    }
   };
 
   return (
