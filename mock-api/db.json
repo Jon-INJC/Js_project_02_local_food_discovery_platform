@@ -850,7 +850,7 @@
       "id": 1,
       "title": "Nordic Evenings",
       "description": "Discover refined Nordic restaurants built around seasonal ingredients and quiet, atmospheric dining.",
-      "image": "/uploads/collections/nordic-evenings.jpg",
+      "image": "https://placehold.co/300x400/orange/white",
       "restaurants": [1, 3],
       "featured": true
     },
@@ -858,7 +858,7 @@
       "id": 2,
       "title": "Coffee & Conversation",
       "description": "Relaxed cafés for slow mornings, good coffee and even better conversations.",
-      "image": "/uploads/collections/coffee-conversation.jpg",
+      "image": "https://placehold.co/300x400/orange/white",
       "restaurants": [4],
       "featured": true
     },
@@ -866,7 +866,7 @@
       "id": 3,
       "title": "Mediterranean Escape",
       "description": "Explore vibrant Mediterranean kitchens filled with fresh seafood, handmade pasta and seasonal flavors.",
-      "image": "/uploads/collections/mediterranean-escape.jpg",
+      "image": "https://placehold.co/300x400/orange/white",
       "restaurants": [3, 2],
       "featured": true
     },
@@ -874,7 +874,7 @@
       "id": 4,
       "title": "Modern European Tables",
       "description": "A selection of contemporary European restaurants bringing classic ingredients into modern kitchens.",
-      "image": "/uploads/collections/modern-european.jpg",
+      "image": "https://placehold.co/300x400/orange/white",
       "restaurants": [2, 4],
       "featured": false
     }
