@@ -5,7 +5,7 @@
       "name": "Yonathan Chalachew",
       "email": "yonathan@example.com",
       "role": "customer",
-      "profileImage": "/uploads/users/user-1.jpg",
+      "profileImage": "https://placehold.co/400x400/orange/white",
       "bio": "Food enthusiast exploring new restaurants and local flavors.",
       "createdAt": "2026-01-15T09:30:00Z"
     },
@@ -14,7 +14,7 @@
       "name": "Sofia Hansen",
       "email": "sofia@example.com",
       "role": "customer",
-      "profileImage": "/uploads/users/user-2.jpg",
+      "profileImage": "https://placehold.co/400x400/orange/white",
       "bio": "Always looking for interesting places to eat.",
       "createdAt": "2026-02-02T11:15:00Z"
     },
@@ -23,7 +23,7 @@
       "name": "Daniel Kim",
       "email": "daniel@example.com",
       "role": "customer",
-      "profileImage": "/uploads/users/user-3.jpg",
+      "profileImage": "https://placehold.co/400x400/orange/white",
       "bio": "Coffee, food and good company.",
       "createdAt": "2026-02-20T14:45:00Z"
     },
@@ -32,7 +32,7 @@
       "name": "Emma Wilson",
       "email": "emma@example.com",
       "role": "customer",
-      "profileImage": "/uploads/users/user-4.jpg",
+      "profileImage": "https://placehold.co/400x400/orange/white",
       "bio": "Exploring independent restaurants and hidden gems.",
       "createdAt": "2026-03-10T08:20:00Z"
     },
@@ -41,14 +41,14 @@
       "name": "Lars Nilsen",
       "email": "lars@luminano.example",
       "role": "restaurant_owner",
-      "profileImage": "/uploads/users/user-5.jpg",
+      "profileImage": "https://placehold.co/400x400/orange/white",
       "bio": "Owner and chef at Lumina Oslo.",
       "createdAt": "2025-12-10T10:00:00Z"
     },
     {
       "id": 6,
       "name": "Maya Patel",
-      "email": "maya@embertable.example",
+      "email": "https://placehold.co/400x400/orange/white",
       "role": "restaurant_owner",
       "profileImage": "/uploads/users/user-6.jpg",
       "bio": "Restaurant owner and hospitality enthusiast.",
@@ -87,6 +87,7 @@
       "rating": 4.9,
       "reviewCount": 128,
       "saveCount": 284,
+      "isFeatured": true,
       "createdAt": "2026-01-05T10:00:00Z",
       "updatedAt": "2026-09-10T15:30:00Z"
     },
@@ -120,6 +121,7 @@
       "rating": 4.7,
       "reviewCount": 94,
       "saveCount": 196,
+      "isFeatured": true,
       "createdAt": "2026-01-20T09:00:00Z",
       "updatedAt": "2026-09-08T12:00:00Z"
     },
@@ -153,6 +155,7 @@
       "rating": 4.8,
       "reviewCount": 76,
       "saveCount": 163,
+      "isFeatured": true,
       "createdAt": "2026-02-14T13:00:00Z",
       "updatedAt": "2026-09-05T16:20:00Z"
     },
@@ -839,6 +842,41 @@
       "eventType": "menu_item_view",
       "menuItemId": 4,
       "createdAt": "2026-09-10T17:30:00Z"
+    }
+  ],
+
+  "curatedCollections": [
+    {
+      "id": 1,
+      "title": "Nordic Evenings",
+      "description": "Discover refined Nordic restaurants built around seasonal ingredients and quiet, atmospheric dining.",
+      "image": "/uploads/collections/nordic-evenings.jpg",
+      "restaurants": [1, 3],
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "Coffee & Conversation",
+      "description": "Relaxed cafés for slow mornings, good coffee and even better conversations.",
+      "image": "/uploads/collections/coffee-conversation.jpg",
+      "restaurants": [4],
+      "featured": true
+    },
+    {
+      "id": 3,
+      "title": "Mediterranean Escape",
+      "description": "Explore vibrant Mediterranean kitchens filled with fresh seafood, handmade pasta and seasonal flavors.",
+      "image": "/uploads/collections/mediterranean-escape.jpg",
+      "restaurants": [3, 2],
+      "featured": true
+    },
+    {
+      "id": 4,
+      "title": "Modern European Tables",
+      "description": "A selection of contemporary European restaurants bringing classic ingredients into modern kitchens.",
+      "image": "/uploads/collections/modern-european.jpg",
+      "restaurants": [2, 4],
+      "featured": false
     }
   ]
 }
