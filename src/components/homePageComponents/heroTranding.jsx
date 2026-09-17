@@ -4,8 +4,15 @@ import { getMenuItems } from "../../api/menuAPI";
 import { getRestaurant } from "../../api/restaurantAPI";
 
 function generateRandomIndex(length){
-  return Math.floor(Math.random() * (length + 1));
+  return Math.floor(Math.random() * (length));
 };
+
+async function getFilteredRecentMenuItems() {
+  const recentItems = await getRecentMenuItems();
+  return recentItems.filter(item => item.eventType === "menu_item_view");
+}
+
+console.log(getFilteredRecentMenuItems());
 
 function HeroTrending() {
   const [ recent, setRecent ] = useState([]);
@@ -13,7 +20,7 @@ function HeroTrending() {
   const [ restaurant, setRestaurant ] = useState({})
 
   useEffect(() => {
-    getRecentMenuItems().then(setRecent).catch(console.error)
+    getFilteredRecentMenuItems().then(setRecent).catch(console.error)
   },[]);
 
   useEffect(() => {
