@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import { getRecentMenuItems } from "../../api/analyticsAPI";
 import { getMenuItems } from "../../api/menuAPI";
 import { getRestaurant } from "../../api/restaurantAPI";
+
+function generateRandomIndex(length){
+  return Math.floor(Math.random() * (length + 1));
+};
+
 function HeroTrending() {
   const [ recent, setRecent ] = useState([]);
   const [ trending, setTreanding ] = useState({})
@@ -12,7 +17,7 @@ function HeroTrending() {
   },[]);
 
   useEffect(() => {
-    getMenuItems(recent[2]?.menuItemId).then(setTreanding).catch(console.error)
+    getMenuItems(recent[generateRandomIndex(recent.length)]?.menuItemId).then(setTreanding).catch(console.error)
   },[recent]);
 
   useEffect(() => {
