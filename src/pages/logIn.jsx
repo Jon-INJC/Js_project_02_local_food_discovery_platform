@@ -53,6 +53,7 @@ function LogIn() {
               noValidate
               className="w-[80%] flex flex-col p-8 gap-y-8 bg-on-tertiary border-2 border-outline-variant"
             >
+              {errors.root && <Error text={errors.root.message} />}
               <div className="flex flex-col gap-y-2">
                 <label
                   htmlFor="email"
