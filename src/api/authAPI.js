@@ -1,6 +1,6 @@
 export async function getUsers(email) {
   const response = await fetch(
-    `http://localhost:3000/users?email=${encodeURIComponent(email)}`
+    `http://localhost:3000/users?email=${encodeURIComponent(email)}`,
   );
 
   if (!response.ok) {
@@ -8,10 +8,15 @@ export async function getUsers(email) {
   }
 
   const users = await response.json();
-  
+
   if (!users || users.length === 0) {
     return null;
   }
 
   return users[0];
+}
+
+export async function setUsers(data) {
+  console.log(data);
+  return data;
 }
