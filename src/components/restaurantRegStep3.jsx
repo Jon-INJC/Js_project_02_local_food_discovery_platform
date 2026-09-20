@@ -2,14 +2,29 @@ import { useFormContext } from "react-hook-form";
 import Error from "./error";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { getRestaurantByName, setRestaurant } from "../api/restaurantAPI";
 function RegStep3() {
-
   const navigate = useNavigate();
-  const { register, handleSubmit, formState } = useFormContext();
+  const { register, handleSubmit, setError, formState } = useFormContext();
   const { errors } = formState;
 
-  const onSubmit = (data) => {
-    console.log("Complete registration:", data);
+  const onSubmit = async (data) => {
+    try {
+      let restaurantData = await getRestaurantByName(data.name);
+      if (restaurantData) {
+        setError("root", {
+          type: "manual",
+          message: "An account was found with this email address.",
+        });
+        return;
+      }
+      restaurantData = await setRestaurant(data);
+    } catch (err) {
+      setError("root", {
+        type: "manual",
+        message: err.message || "An unexpected error occurred",
+      });
+    }
   };
 
   return (
@@ -35,6 +50,7 @@ function RegStep3() {
           noValidate
           className="w-[90%] flex flex-col p-6 gap-y-5 bg-on-tertiary border-2 border-outline-variant"
         >
+          {errors.root && <Error text={errors.root.message} />}
           <div className="flex flex-col gap-y-2">
             <label
               htmlFor="ownerName"
