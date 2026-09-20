@@ -4,14 +4,33 @@ import { useForm } from "react-hook-form";
 import Error from "../components/error";
 import { useContext } from "react";
 import { UserContext } from "../context_API/userContextProvider";
+import { getUsers, setUsers } from "../api/authAPI";
 
 function SignUp() {
   const { setUserValue } = useContext(UserContext);
-  const { register, handleSubmit, formState } = useForm();
+  const { register, handleSubmit, setError, formState } = useForm();
   const { errors } = formState;
 
-  const onSubmit = (data) => {
-    setUserValue(data);
+  const onSubmit = async (data) => {
+    try {
+      let userData = await getUsers(data.email);
+      if (userData) {
+        // Set error on the email field specifically
+        setError("email", {
+          type: "manual",
+          message: "An account was found with this email address.",
+        });
+        return;
+      }
+      userData = await setUsers(data);
+      setUserValue(userData);
+      console.log("Logged in user:", userData);
+    } catch (err) {
+      setError("root", {
+        type: "manual",
+        message: err.message || "An unexpected error occurred",
+      });
+    }
   };
 
   return (
@@ -35,6 +54,7 @@ function SignUp() {
               noValidate
               className="w-[80%] flex flex-col p-8 gap-y-6 bg-on-tertiary border-2 border-outline-variant"
             >
+              {errors.root && <Error text={errors.root.message} />}
               <div className="flex flex-col gap-y-2">
                 <label
                   htmlFor="fullName"
