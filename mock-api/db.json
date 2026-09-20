@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Yonathan Chalachew",
-      "email": "yonathan@example.com",
+      "email": "chalachewyonathan8@gmail.com",
       "role": "customer",
       "profileImage": "https://placehold.co/400x400/orange/white",
       "bio": "Food enthusiast exploring new restaurants and local flavors.",
@@ -833,7 +833,7 @@
       "userId": 3,
       "eventType": "menu_item_view",
       "menuItemId": 14,
-      "createdAt": "2026-09-10T08:45:00Z"
+      "createdAt": "2026-09-10T17:30:00Z"
     },
     {
       "id": 20,
