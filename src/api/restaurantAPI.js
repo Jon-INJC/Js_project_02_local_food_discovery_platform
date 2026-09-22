@@ -46,3 +46,28 @@ export async function setRestaurant(data) {
   console.log(data);
   return data;
 }
+
+
+export async function getRestaurantSaves(id) {
+  const response = await fetch(
+    `http://localhost:3000/restaurantSaves?restaurantId=${id}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch restaurant");
+  }
+
+  return response.json();
+}
+
+export async function getRestaurantByOwnerId(id) {
+  const response = await fetch(
+    `http://localhost:3000/restaurants?ownerId=${id}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch restaurant");
+  }
+
+  return response.json();
+}
