@@ -58,34 +58,6 @@ function ActiveMenu({ menuItems = [], loading }) {
               />
             ))
         )}
-        {/* first card */}
-        {/* <ActiveMenuCard
-          state="available"
-          title="Truffle Risotto"
-          price={32.00}
-          description="Arborio rice slowly cooked in rich vegetable broth, finished with..."
-          label="special"
-          likes={342}
-          image="https://placehold.co/400x500/orange/white"
-        /> */}
-        {/* second card */}
-        {/* <ActiveMenuCard
-          state="available"
-          title="Seared Scallops"
-          price={28.00}
-          description="Pan-seared jumbo scallops served with pea purée, crispy pancetta, and micro basil."
-          likes={289}
-          image="https://placehold.co/400x500/orange/white"
-        /> */}
-        {/* sold item card */}
-        {/* <ActiveMenuCard
-          state="sold"
-          title="Lobster Thermidor"
-          price={35.00}
-          description="Lobster meat in a rich, creamy sauce, served with saffron risotto."
-          likes={256}
-          image="https://placehold.co/400x500/orange/white"
-        /> */}
       </div>
     </div>
   );
