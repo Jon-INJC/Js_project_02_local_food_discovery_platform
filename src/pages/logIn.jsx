@@ -5,8 +5,13 @@ import Error from "../components/error";
 import { useContext } from "react";
 import { UserContext } from "../context_API/userContextProvider";
 import { getUsers } from "../api/authAPI";
+import { getRestaurantByOwnerId } from "../api/restaurantAPI";
+import { RestaurantContext } from "../context_API/restaurantContextProvider";
+import { useNavigate } from "react-router-dom";
 function LogIn() {
+  const navigate = useNavigate();
   const { setUserValue } = useContext(UserContext);
+  const { setRestaurantValue } = useContext(RestaurantContext);
   const { register, handleSubmit, setError, formState } = useForm();
   const { errors } = formState;
 
@@ -23,6 +28,11 @@ function LogIn() {
       }
 
       setUserValue(userData);
+      if(userData.role == "restaurant_owner"){
+        const restaurant = await getRestaurantByOwnerId(userData.id);
+        setRestaurantValue(restaurant);
+        navigate("/dashboard/overview");
+      }
       console.log("Logged in user:", userData);
     } catch (err) {
       setError("root", {
