@@ -2,7 +2,29 @@ import navBarLogo from "../../assets/Aura_logo.svg";
 import { Plus } from "lucide-react";
 import OverviewHero from "./overviewComponents/overviewHero";
 import ActiveMenu from "./overviewComponents/activeMenu";
+import { useContext, useEffect, useState } from "react";
+import { RestaurantContext } from "../../context_API/restaurantContextProvider";
+import { getRestaurantMenuItems } from "../../api/menuAPI";
 function Overview() {
+  const { restaurant } = useContext(RestaurantContext);
+  const [menuItems, setMenuItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const restaurantId = Array.isArray(restaurant) ? restaurant[0]?.id : restaurant?.id;
+    if (!restaurantId) return;
+
+    getRestaurantMenuItems(restaurantId)
+      .then((items) => {
+        setMenuItems(items || []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [restaurant]);
+
   return (
     <>
       <div className="flex items-center justify-between md:hidden">
@@ -17,8 +39,8 @@ function Overview() {
           Add Menu Item
         </button>
       </div>
-      <OverviewHero />
-      <ActiveMenu />
+      <OverviewHero menuItems={menuItems} loading={loading} />
+      <ActiveMenu menuItems={menuItems} loading={loading} />
     </>
   );
 }
