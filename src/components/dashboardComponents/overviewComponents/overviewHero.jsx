@@ -1,14 +1,17 @@
 import React from "react";
 import { Heart, Plus, Star, Utensils } from "lucide-react";
 import { NavLink } from "react-router-dom";
-function OverviewHero({ menuItems = [], loading }) {
+import { useMenu } from "../../../context_API/menuContextProvider";
+function OverviewHero() {
+
+  const { menuItems, loading } = useMenu();
+
+  if (loading) {
+    return <div className="container mt-7 text-secondary">Loading menu items...</div>;
+  }
 
   const likeCount = calculateTotalLikes(menuItems);
   const todaysSpecial = findTodaysSpecial(menuItems);
-
-  if (loading) {
-    return <div className="mt-7 text-secondary">Loading metrics...</div>;
-  }
 
   return (
     <div className="container mt-7 flex flex-col gap-y-15">

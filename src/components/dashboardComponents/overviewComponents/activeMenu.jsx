@@ -1,18 +1,19 @@
 import { Heart, ListFilter, Pencil, Search, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { useMenu } from "../../../context_API/menuContextProvider";
 
-function ActiveMenu({ menuItems = [], loading }) {
+function ActiveMenu() {
+
+  const { menuItems, loading } = useMenu();
   const [searchQuery, setSearchQuery] = useState("");
+
+  if (loading) {
+    return <div className="container mt-7 text-secondary">Loading menu items...</div>;
+  }
 
   const filteredItems = menuItems.filter((item) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
   );
-
-  if (loading) {
-    return (
-      <div className="container mt-10 text-secondary">Loading menu...</div>
-    );
-  }
 
   return (
     <div className="container mt-10 flex flex-col gap-y-15">

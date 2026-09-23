@@ -1,8 +1,17 @@
 import { Heart, Pencil, Trash2 } from "lucide-react";
+import { useMenu } from "../../../context_API/menuContextProvider";
 
 function DashMenuItems() {
+  const { menuItems, loading } = useMenu();
+
+  if (loading) {
+    return (
+      <div className="container mt-7 text-secondary">Loading menu items...</div>
+    );
+  }
+
   return (
-    <div className="container mt-7 flex flex-col gap-y-5">
+    <div className="container mt-7 flex flex-col gap-y-5 overflow-y-scroll">
       <div className="w-full px-4 py-3 grid grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-6 text-secondary text-xs border-b-2 border-outline-variant md:font-bold">
         <p className="text-center">ITEM NAME</p>
         <p>CATEGORY</p>
@@ -10,7 +19,22 @@ function DashMenuItems() {
         <p>LIKES</p>
         <p className="text-right">ACTIONS</p>
       </div>
-      <MenuItemsRow 
+      {menuItems.length === 0 ? (
+        <p className="text-secondary text-sm">No menu items found.</p>
+      ) : (
+        menuItems.map((item) => (
+          <MenuItemsRow
+            key={item.id || item._id}
+            image={item.image || "https://placehold.co/400x500/orange/white"}
+            itemName={item.name || item.title}
+            description={item.description}
+            category={item.category || "General"}
+            price={item.price || 0}
+            likes={item.likesCount || 0}
+          />
+        ))
+      )}
+      {/* <MenuItemsRow
         image="https://placehold.co/400x500/orange/white"
         itemName="Pan-Seared Scallops"
         description="With pea purée and crispy pancetta"
@@ -18,39 +42,35 @@ function DashMenuItems() {
         price={24.0}
         likes={128}
       />
-      <MenuItemsRow 
+      <MenuItemsRow
         image="https://placehold.co/400x500/orange/white"
         itemName="Wagyu Ribeye A5"
         description="Truffle mash, charred asparagus, demi-glace"
         category="Main"
         price={85.0}
         likes={342}
-      />
+      /> */}
     </div>
   );
 }
 
 function MenuItemsRow(props) {
-    const { image, itemName, description, category, price, likes } = props;
+  const { image, itemName, description, category, price, likes } = props;
   return (
     <div className="w-full px-4 py-3 grid grid-cols-[2fr_1fr_1fr_1fr_1fr] items-center gap-6 bg-on-tertiary border-2 border-surface-container-highest rounded-sm shadow-md">
       <div className="flex flex-col gap-2 md:flex-row md:items-center">
-        <img
-          src={image}
-          alt=""
-          className="w-12.5 h-12.5 object-cover"
-        />
+        <img src={image} alt="" className="w-12.5 h-12.5 object-cover" />
         <div className="flex flex-col gap-1">
           <h3 className="text-sm text-on-surface font-bold font-main-header md:text-xl">
             {itemName}
           </h3>
-          <p className="text-xs text-secondary">
-            {description}
-          </p>
+          <p className="text-xs text-secondary">{description}</p>
         </div>
       </div>
       <p className="text-sm text-on-surface-variant">{category}</p>
-      <p className="text-lg text-primary font-bold font-main-header">${price.toFixed(2)}</p>
+      <p className="text-lg text-primary font-bold font-main-header">
+        ${price.toFixed(2)}
+      </p>
       <div className="flex items-center gap-2 text-secondary">
         <Heart className="w-4 h-4" />
         <p className="text-sm">{likes}</p>
