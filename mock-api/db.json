@@ -511,7 +511,7 @@
       "restaurantId": 1,
       "userId": 1,
       "menuItemId": 4,
-      "rating": 5,
+      "rating": 3.5,
       "comment": "The Arctic char was beautifully cooked and the presentation was incredible.",
       "createdAt": "2026-08-28T18:20:00Z"
     },
@@ -529,7 +529,7 @@
       "restaurantId": 1,
       "userId": 3,
       "menuItemId": null,
-      "rating": 4,
+      "rating": 4.5,
       "comment": "Beautiful atmosphere and a very interesting seasonal menu.",
       "createdAt": "2026-09-02T17:45:00Z"
     },
