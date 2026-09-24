@@ -1,13 +1,13 @@
 import { HeartIcon, Lightbulb } from "lucide-react";
 import React from "react";
 
-function FeedbackSentiment() {
+function FeedbackSentiment({ feedback }) {
   return (
     <div className="p-6 flex flex-col gap-4 border-2 border-outline-variant">
       <span className="text-2xl text-on-surface font-bold font-main-header">
         Feedback Sentiment
       </span>
-      <FeedbackRate rate={78} type="Positive" />
+      <FeedbackRate rate={feedback} type="Positive" />
       <div className="flex flex-col gap-4">
         <span className="text-secondary text-sm font-semibold">
           COMMON THEMES
