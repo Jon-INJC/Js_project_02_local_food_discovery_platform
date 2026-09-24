@@ -10,8 +10,8 @@ function AddMenu() {
 
   const onSubmit = async (data) => {
       try {
-        let menuItemData = await getMenuItemsByName(data.name);
-        if (menuItemData) {
+        let menuItemData = await getMenuItemsByName(data.dishNomenclature);
+        if (menuItemData.length) {
           setError("root", {
             type: "manual",
             message: "A menu item was found with this menu name.",
