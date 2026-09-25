@@ -18,20 +18,14 @@ export async function getUsers(email) {
 
 export async function getUsersByID(id) {
   const response = await fetch(
-    `http://localhost:3000/users/${id}`,
+    `http://localhost:3000/users/${id}`
   );
 
   if (!response.ok) {
-    throw new Error("Failed to reach authentication server");
+    throw new Error("Failed to fetch user");
   }
 
-  const users = await response.json();
-
-  if (!users || users.length === 0) {
-    return null;
-  }
-
-  return users[0];
+  return response.json();
 }
 
 export async function setUsers(data) {
