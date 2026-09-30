@@ -48,9 +48,9 @@
     {
       "id": 6,
       "name": "Maya Patel",
-      "email": "https://placehold.co/400x400/orange/white",
+      "email": "patel@example.com",
       "role": "restaurant_owner",
-      "profileImage": "/uploads/users/user-6.jpg",
+      "profileImage": "https://placehold.co/400x400/orange/white",
       "bio": "Restaurant owner and hospitality enthusiast.",
       "createdAt": "2025-11-22T12:30:00Z"
     }
