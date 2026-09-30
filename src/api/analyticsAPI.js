@@ -16,3 +16,15 @@ export async function getRecentMenuItems() {
 
   return resentMenus;
 }
+
+export async function getAnalyticsEventsByRestaurantId(id) {
+  const response = await fetch(
+    `http://localhost:3000/analyticsEvents?restaurantId=${id}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to analyticsEvents");
+  }
+
+  return response.json();
+}
