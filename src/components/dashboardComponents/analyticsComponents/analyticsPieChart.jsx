@@ -1,20 +1,52 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
-const data = [
-  { name: "Search", value: 45, color: "#A63A00" },
-  { name: "Browse", value: 30, color: "#333333" },
-  { name: "Shared", value: 15, color: "#8C6F64" },
-  { name: "Direct", value: 10, color: "#E0DDD9" },
-];
+function getTotalValues(events) {
+  if (!events || events.length === 0) return [];
 
-function PieGraph() {
+  // 1. Filter events from the last 30 days
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+  const filteredEvents = events.filter((event) => {
+    const eventDate = new Date(event.createdAt);
+    return eventDate >= thirtyDaysAgo;
+  });
+
+  const totals = [
+    { name: "Restaurant View", value: 45, color: "#A63A00" },
+    { name: "Menu View", value: 30, color: "#333333" },
+    { name: "Menu Item View", value: 15, color: "#8C6F64" },
+  ];
+
+  filteredEvents.forEach((event) => {
+    if (event.eventType === "restaurant_view") {
+      totals[0].value += 1;
+    } else if (event.eventType === "menu_view") {
+      totals[1].value += 1;
+    } else if (event.eventType === "menu_item_view") {
+      totals[2].value += 1;
+    }
+  });
+
+  return totals;
+}
+
+function PieGraph({ analyticEvents = {}, loading }) {
+  const totals = useMemo(() => {
+    return getTotalValues(analyticEvents);
+  }, [analyticEvents]);
+
+  if (loading) {
+    return <div className="mt-7 text-secondary">Loading metrics...</div>;
+  }
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <PieChart>
-        <Legend content={<CustomLegend />} />
+        <Legend content={<CustomLegend data={totals} />} />
         <Pie
-          data={data}
+          data={totals}
           cx="50%"
           cy="42%"
           innerRadius="50%"
@@ -24,7 +56,7 @@ function PieGraph() {
           dataKey="value"
           stroke="none"
         >
-          {data.map((entry, index) => (
+          {totals.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={entry.color} />
           ))}
         </Pie>
@@ -37,7 +69,9 @@ function PieGraph() {
           dominantBaseline="middle"
           className="text-2xl text-on-surface font-main-header font-bold"
         >
-          18.4k
+          {totals.reduce((acc, curr) => {
+            return acc + curr.value;
+          }, 0)}
         </text>
         <text
           x="50%"
@@ -53,7 +87,7 @@ function PieGraph() {
   );
 }
 
-function CustomLegend() {
+function CustomLegend({ data }) {
   return (
     <div className="grid grid-cols-2 gap-x-3 gap-y-4 ml-10">
       {data.map((item) => (
