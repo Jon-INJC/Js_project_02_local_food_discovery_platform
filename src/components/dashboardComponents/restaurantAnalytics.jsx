@@ -58,7 +58,7 @@ function DashAnalytics() {
           </span>
 
           <div className="h-80 w-full">
-            <PieGraph />
+            <PieGraph analyticEvents={analyticEvents} loading={loading} />
           </div>
         </div>
         <OverallEngagementRate />
