@@ -61,7 +61,7 @@ function DashAnalytics() {
             <PieGraph analyticEvents={analyticEvents} loading={loading} />
           </div>
         </div>
-        <OverallEngagementRate />
+        <OverallEngagementRate analyticEvents={analyticEvents} loading={loading} />
       </div>
 
       <div className="container mt-7 p-6 border-2 border-outline-variant">
