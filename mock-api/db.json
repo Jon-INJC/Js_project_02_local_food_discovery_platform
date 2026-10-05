@@ -74,7 +74,7 @@
         "phone": "+47 21 45 67 89"
       },
       "logo": "/uploads/restaurants/lumina-logo.jpg",
-      "coverImage": "/uploads/restaurants/lumina.jpg",
+      "coverImage": "https://placehold.co/600x400/orange/white",
       "operatingHours": {
         "monday": "11:30-22:00",
         "tuesday": "11:30-22:00",
@@ -108,7 +108,7 @@
         "phone": "+44 131 555 0182"
       },
       "logo": "/uploads/restaurants/ember-logo.jpg",
-      "coverImage": "/uploads/restaurants/ember.jpg",
+      "coverImage": "https://placehold.co/600x400/orange/white",
       "operatingHours": {
         "monday": "12:00-21:30",
         "tuesday": "12:00-21:30",
@@ -142,7 +142,7 @@
         "phone": "+39 081 555 0147"
       },
       "logo": "/uploads/restaurants/mare-blu-logo.jpg",
-      "coverImage": "/uploads/restaurants/mare-blu.jpg",
+      "coverImage": "https://placehold.co/600x400/orange/white",
       "operatingHours": {
         "monday": "12:00-22:00",
         "tuesday": "12:00-22:00",
@@ -176,7 +176,7 @@
         "phone": "+251 911 234 567"
       },
       "logo": "/uploads/restaurants/kaffa-logo.jpg",
-      "coverImage": "/uploads/restaurants/kaffa-house.jpg",
+      "coverImage": "https://placehold.co/600x400/orange/white",
       "operatingHours": {
         "monday": "07:00-21:00",
         "tuesday": "07:00-21:00",
@@ -536,7 +536,7 @@
     {
       "id": 4,
       "restaurantId": 2,
-      "userId": 4,
+      "userId": 5,
       "menuItemId": 8,
       "rating": 5,
       "comment": "The roasted chicken was excellent. The smoky flavor was perfect.",
@@ -563,7 +563,7 @@
     {
       "id": 7,
       "restaurantId": 4,
-      "userId": 1,
+      "userId": 5,
       "menuItemId": 13,
       "rating": 5,
       "comment": "Fantastic coffee. The floral notes were really noticeable.",
@@ -572,7 +572,7 @@
     {
       "id": 8,
       "restaurantId": 4,
-      "userId": 3,
+      "userId": 5,
       "menuItemId": 15,
       "rating": 4,
       "comment": "Great breakfast and a really welcoming atmosphere.",
@@ -619,13 +619,13 @@
     },
     {
       "id": 7,
-      "userId": 4,
+      "userId": 5,
       "restaurantId": 1,
       "createdAt": "2026-09-02T13:20:00Z"
     },
     {
       "id": 8,
-      "userId": 4,
+      "userId": 5,
       "restaurantId": 3,
       "createdAt": "2026-09-06T15:40:00Z"
     }
@@ -670,13 +670,13 @@
     },
     {
       "id": 7,
-      "userId": 4,
+      "userId": 5,
       "menuItemId": 4,
       "createdAt": "2026-09-02T13:00:00Z"
     },
     {
       "id": 8,
-      "userId": 4,
+      "userId": 5,
       "menuItemId": 15,
       "createdAt": "2026-09-08T10:20:00Z"
     }
