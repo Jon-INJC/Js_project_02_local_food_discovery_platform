@@ -1,6 +1,27 @@
 import { Bookmark } from "lucide-react";
+import { getRestaurant } from "../../api/restaurantAPI";
+import { useEffect, useState } from "react";
 
-function SavedRestaurant() {
+function SavedRestaurant({ saved }) {
+  const [savedrestaurants, setSavedRestaurants] = useState([]);
+
+  useEffect(() => {
+    if (!saved || saved.length === 0) return;
+    async function loadRelatedData() {
+      const fullsaved = await Promise.all(
+        saved.map(async (saved) => {
+          try {
+            return await getRestaurant(saved.restaurantId);
+          } catch (err) {
+            console.error(`Failed to fetch user ${saved.restaurantId}`, err);
+          }
+        }),
+      );
+      setSavedRestaurants(fullsaved);
+    }
+    loadRelatedData();
+  });
+  console.log(savedrestaurants);
   return (
     <section className="w-screen max-w-4xl px-6 mx-auto border-b-2 border-solid border-outline-variant pb-10">
       <div className="container flex flex-col gap-6">
@@ -16,24 +37,36 @@ function SavedRestaurant() {
           </a>
         </div>
         <div className="grid grid-cols-12 grid-rows-12 gap-x-6 gap-y-2">
-          <SavedRestaurantCard
-            image="https://placehold.co/600x400/orange/white"
-            name="L'Osteria del Mare"
-            location="COASTAL ITALIAN • VENICE, CA"
-            isResentlyAdded={true}
-          />
-          <SavedRestaurantCard
-            image="https://placehold.co/600x500/orange/white"
-            name="Verdant"
-            location="New American • Brooklyn, NY"
-            isResentlyAdded={false}
-          />
-          <SavedRestaurantCard
-            image="https://placehold.co/600x500/orange/white"
-            name="The Green Room"
-            location="Farm-to-Table • San Francisco, CA"
-            isResentlyAdded={false}
-          />
+          {savedrestaurants.length === 0 ? (
+            <h3>No saved restaurant found</h3>
+          ) : (
+            savedrestaurants.map((item, index) => {
+              if (index == 0) {
+                return (
+                  <SavedRestaurantCard
+                    image={
+                      item.coverImage ||
+                      "https://placehold.co/600x400/orange/white"
+                    }
+                    name={item.name}
+                    location={item.location?.address}
+                    isResentlyAdded={true}
+                  />
+                );
+              }
+              return (
+                <SavedRestaurantCard
+                  image={
+                    item.coverImage ||
+                    "https://placehold.co/600x400/orange/white"
+                  }
+                  name={item.name}
+                  location={item?.location?.address}
+                  isResentlyAdded={false}
+                />
+              );
+            })
+          )}
         </div>
       </div>
     </section>
