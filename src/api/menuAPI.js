@@ -38,3 +38,15 @@ export async function getRestaurantMenuItems(id) {
 
   return response.json();
 }
+
+export async function getMenuItemLikesByUserId(id) {
+  const response = await fetch(
+    `http://localhost:3000/menuItemLikes?userId=${id}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch menu items");
+  }
+
+  return response.json();
+}
