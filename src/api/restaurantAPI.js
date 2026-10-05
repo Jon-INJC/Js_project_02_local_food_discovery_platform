@@ -71,3 +71,15 @@ export async function getRestaurantByOwnerId(id) {
 
   return response.json();
 }
+
+export async function getSavedRestaurantByUserId(id) {
+  const response = await fetch(
+    `http://localhost:3000/restaurantSaves?userId=${id}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch restaurant");
+  }
+
+  return response.json();
+}
