@@ -4,6 +4,7 @@ import {
   UtensilsCrossed,
   ChartNoAxesCombined,
   MessageSquareDiff,
+  CircleUser,
 } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom";
 import { MenuProvider } from "../context_API/menuContextProvider";
@@ -13,6 +14,7 @@ const NAV_ITEMS = [
 { title: "Menu", path: "/dashboard/menu", icon: UtensilsCrossed },
 { title: "Analytics", path: "/dashboard/analytics", icon: ChartNoAxesCombined },
 { title: "Review", path: "/dashboard/review", icon: MessageSquareDiff },
+{ title: "Profile", path: "/profile", icon: CircleUser },
 ];
 
 function RestaurantDash() {
