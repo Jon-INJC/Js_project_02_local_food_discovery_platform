@@ -3,13 +3,29 @@ import { useDropzone } from "react-dropzone";
 import { ImagePlus, X } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import Error from "../error";
+import { getMenuItemsByName, setMenuItem } from "../../api/menuAPI";
 function AddMenu() {
-  const { control, register, handleSubmit, formState } = useForm();
+  const { control, register, handleSubmit, setError, formState } = useForm();
   const { errors } = formState;
 
-  const onSubmit = (data) => {
-    console.log("Form submitted.", data);
-  };
+  const onSubmit = async (data) => {
+      try {
+        let menuItemData = await getMenuItemsByName(data.dishNomenclature);
+        if (menuItemData.length) {
+          setError("root", {
+            type: "manual",
+            message: "A menu item was found with this menu name.",
+          });
+          return;
+        }
+        menuItemData = await setMenuItem(data);
+      } catch (err) {
+        setError("root", {
+          type: "manual",
+          message: err.message || "An unexpected error occurred",
+        });
+      }
+    };
 
   return (
     <>
@@ -35,6 +51,7 @@ function AddMenu() {
           noValidate
           className="flex flex-col gap-y-4"
         >
+          {errors.root && <Error text={errors.root.message} />}
           <section className="flex flex-col gap-y-2">
             <span className="text-md font-semibold">Signature Visual</span>
             <Controller

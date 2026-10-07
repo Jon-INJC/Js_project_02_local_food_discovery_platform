@@ -12,15 +12,7 @@ export function UserContextProvider({ children }) {
   }, [user]);
 
   const setUserValue = (data) => {
-    const UserValue = {
-      user_id: data.user_id || null,
-      user_name: data.fullName || null,
-      user_email: data.email || null,
-      is_loggedIn: true,
-      is_loggedOut: false,
-      is_Restaurant: false,
-    };
-    setUser(UserValue);
+    setUser(data);
   };
 
   const ContextValue = {

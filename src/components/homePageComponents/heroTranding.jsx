@@ -1,4 +1,36 @@
+import { useState, useEffect } from "react";
+import { getRecentMenuItems } from "../../api/analyticsAPI";
+import { getMenuItems } from "../../api/menuAPI";
+import { getRestaurant } from "../../api/restaurantAPI";
+
+function generateRandomIndex(length){
+  return Math.floor(Math.random() * (length));
+};
+
+async function getFilteredRecentMenuItems() {
+  const recentItems = await getRecentMenuItems();
+  return recentItems.filter(item => item.eventType === "menu_item_view");
+}
+
+console.log(getFilteredRecentMenuItems());
+
 function HeroTrending() {
+  const [ recent, setRecent ] = useState([]);
+  const [ trending, setTreanding ] = useState({})
+  const [ restaurant, setRestaurant ] = useState({})
+
+  useEffect(() => {
+    getFilteredRecentMenuItems().then(setRecent).catch(console.error)
+  },[]);
+
+  useEffect(() => {
+    getMenuItems(recent[generateRandomIndex(recent.length)]?.menuItemId).then(setTreanding).catch(console.error)
+  },[recent]);
+
+  useEffect(() => {
+    getRestaurant(trending.restaurantId).then(setRestaurant).catch(console.error)
+  },[trending]);
+
   return (
     <div className="relative">
       <img src="https://placehold.co/400x500/orange/white" alt="" />
@@ -11,13 +43,14 @@ function HeroTrending() {
         <div className="flex flex-col md:text-xs">
           <p className="text-primary font-bold">TRENDING NOW</p>
           <p className="text-on-surface font-bold text-sm font-main-header">
-            Molten…
+            {trending.name}
           </p>
-          <p className="text-secondary">L'Aura Patisserie • $14</p>
+          <p className="text-secondary">{restaurant.name} • ${trending.price}</p>
         </div>
       </div>
     </div>
   );
 }
+
 
 export default HeroTrending;

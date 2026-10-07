@@ -1,7 +1,18 @@
 import React from "react";
 import { Heart, Plus, Star, Utensils } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useMenu } from "../../../context_API/menuContextProvider";
 function OverviewHero() {
+
+  const { menuItems, loading } = useMenu();
+
+  if (loading) {
+    return <div className="container mt-7 text-secondary">Loading menu items...</div>;
+  }
+
+  const likeCount = calculateTotalLikes(menuItems);
+  const todaysSpecial = findTodaysSpecial(menuItems);
+
   return (
     <div className="container mt-7 flex flex-col gap-y-15">
       <div className="flex items-start justify-between md:items-center">
@@ -22,11 +33,11 @@ function OverviewHero() {
         </NavLink>
       </div>
       <div className="w-full flex gap-x-6">
-        <OverviewInfoCard title="TOTAL MENU ITEMS" value="42" icon={Utensils} />
-        <OverviewInfoCard title="TOTAL LIKES" value="1,204" icon={Heart} />
+        <OverviewInfoCard title="TOTAL MENU ITEMS" value={menuItems.length} icon={Utensils} />
+        <OverviewInfoCard title="TOTAL LIKES" value={likeCount} icon={Heart} />
         <OverviewSpecialCard
-          title="Truffle Risotto"
-          text="Currently featured on the main discovery feed."
+          title={todaysSpecial?.name || "None Set!"}
+          text={todaysSpecial ? "Currently featured on the main discovery feed." : ""}
           icon={Star}
         />
       </div>
@@ -68,6 +79,23 @@ function OverviewSpecialCard(props) {
       </div>
     </div>
   );
+}
+
+function calculateTotalLikes(menuitems){
+  let totalCount = 0;
+
+  menuitems.map(item => {
+    if(item.likesCount){
+      totalCount+= item.likesCount;
+    }
+  })
+
+  return totalCount;
+}
+
+function findTodaysSpecial(menuItems){
+  const special = menuItems.find(item => item.isTodaySpecial == true);
+  return special;
 }
 
 export default OverviewHero;

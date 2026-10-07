@@ -22,7 +22,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Profile from "./pages/profile.jsx";
-import { UserContextProvider } from "./context API/userContextProvider.jsx";
+import { UserContextProvider } from "./context_API/userContextProvider.jsx";
+import { RestaurantContextProvider } from "./context_API/restaurantContextProvider.jsx";
 function app() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -51,7 +52,9 @@ function app() {
   );
   return (
     <UserContextProvider>
-      <RouterProvider router={router} />
+      <RestaurantContextProvider>
+        <RouterProvider router={router} />
+      </RestaurantContextProvider>
     </UserContextProvider>
   );
 }
