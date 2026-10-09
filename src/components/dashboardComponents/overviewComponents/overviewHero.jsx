@@ -2,13 +2,10 @@ import React from "react";
 import { Heart, Plus, Star, Utensils } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useMenu } from "../../../context_API/menuContextProvider";
+import Skeleton from "react-loading-skeleton";
 function OverviewHero() {
 
   const { menuItems, loading } = useMenu();
-
-  if (loading) {
-    return <div className="container mt-7 text-secondary">Loading menu items...</div>;
-  }
 
   const likeCount = calculateTotalLikes(menuItems);
   const todaysSpecial = findTodaysSpecial(menuItems);
@@ -33,12 +30,13 @@ function OverviewHero() {
         </NavLink>
       </div>
       <div className="w-full flex gap-x-6">
-        <OverviewInfoCard title="TOTAL MENU ITEMS" value={menuItems.length} icon={Utensils} />
-        <OverviewInfoCard title="TOTAL LIKES" value={likeCount} icon={Heart} />
+        <OverviewInfoCard title="TOTAL MENU ITEMS" value={menuItems.length} icon={Utensils} loading={loading} />
+        <OverviewInfoCard title="TOTAL LIKES" value={likeCount} icon={Heart} loading={loading} />
         <OverviewSpecialCard
           title={todaysSpecial?.name || "None Set!"}
           text={todaysSpecial ? "Currently featured on the main discovery feed." : ""}
           icon={Star}
+          loading={loading}
         />
       </div>
     </div>
@@ -46,16 +44,16 @@ function OverviewHero() {
 }
 
 function OverviewInfoCard(props) {
-  const { title, value, icon } = props;
+  const { title, value, icon, loading } = props;
   return (
     <div className="relative w-50 h-35 p-5 flex flex-col gap-y-3 border-3 border-outline-variant">
       <div className="flex items-center justify-between">
-        <p className="max-w-1/2 text-xs text-secondary font-bold">{title}</p>
-        {icon &&
-          React.createElement(icon, { className: "w-4 h-4 text-outline" })}
+        <p className="max-w-1/2 text-xs text-secondary font-bold">{!loading ? title : <Skeleton width={100} />}</p>
+        {!loading ? icon &&
+          React.createElement(icon, { className: "w-4 h-4 text-outline" }) : <Skeleton width={20} height={20} />}
       </div>
       <p className="text-3xl text-on-surface font-bold font-main-header">
-        {value}
+        { !loading ? value : <Skeleton /> }
       </p>
       <div className="absolute bottom-0 right-0 w-20 h-20 rounded-tl-md bg-surface-tint"></div>
     </div>
@@ -63,19 +61,19 @@ function OverviewInfoCard(props) {
 }
 
 function OverviewSpecialCard(props) {
-  const { title, text, icon } = props;
+  const { title, text, icon, loading } = props;
   return (
     <div className="p-5 flex flex-col gap-y-2 bg-primary grow md:gap-y-4">
       <div className="flex items-center justify-between">
         <p className="text-sm text-inverse-primary">TODAY'S SPECIAL</p>
-        {icon &&
-          React.createElement(icon, { className: "w-4 h-4 text-on-tertiary" })}
+        {!loading ? icon &&
+          React.createElement(icon, { className: "w-4 h-4 text-on-tertiary" }) : <Skeleton width={20} height={20} />}
       </div>
       <div className="flex flex-col gap-y-1">
         <h3 className="text-xl text-on-tertiary font-bold font-main-header md:text-3xl">
-          {title}
+          { !loading ? title : <Skeleton width={200} /> }
         </h3>
-        <p className="text-xs text-inverse-primary">{text}</p>
+        <p className="text-xs text-inverse-primary">{ !loading ? text : <Skeleton width={150} /> }</p>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import Skeleton from "react-loading-skeleton";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
 function getTotalValues(events) {
@@ -37,16 +38,16 @@ function PieGraph({ analyticEvents = {}, loading }) {
     return getTotalValues(analyticEvents);
   }, [analyticEvents]);
 
-  if (loading) {
-    return <div className="mt-7 text-secondary">Loading metrics...</div>;
-  }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <PieChart>
-        <Legend content={<CustomLegend data={totals} />} />
-        <Pie
-          data={totals}
+    loading ? (
+        <Skeleton height="100%" />
+    ) : (
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Legend content={<CustomLegend data={totals} />} />
+          <Pie
+            data={totals}
           cx="50%"
           cy="42%"
           innerRadius="50%"
@@ -84,7 +85,7 @@ function PieGraph({ analyticEvents = {}, loading }) {
         </text>
       </PieChart>
     </ResponsiveContainer>
-  );
+  ));
 }
 
 function CustomLegend({ data }) {

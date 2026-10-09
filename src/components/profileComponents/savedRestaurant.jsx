@@ -1,6 +1,7 @@
 import { Bookmark } from "lucide-react";
 import { getRestaurant } from "../../api/restaurantAPI";
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 function SavedRestaurant({ saved }) {
   const [savedrestaurants, setSavedRestaurants] = useState([]);
@@ -72,6 +73,39 @@ function SavedRestaurant({ saved }) {
     </section>
   );
 }
+
+// skeleton loading component
+export const SavedRestaurantSkeleton = () => (
+  <section className="w-screen max-w-4xl px-6 mx-auto border-b-2 border-solid border-outline-variant pb-10">
+    <div className="container flex flex-col gap-6">
+      <div className="flex items-center justify-between">
+        <h2 className="text-4xl text-on-surface font-bold font-main-header mt-10 mb-6">
+          Saved Restaurants
+        </h2>
+        <a
+          href="#"
+          className="text-primary underline hover:-translate-y-1 decoration-primary text-xs font-bold"
+        >
+          VIEW ALL
+        </a>
+      </div>
+      <div className="grid grid-cols-12 grid-rows-12 gap-x-6 gap-y-2">
+        {Array.from({ length: 6 }).map(() => (
+          <div className="relative col-span-6 row-span-5 md:col-span-4 md:row-span-6">
+            <div className="p-1 absolute top-5 right-5 bg-surface-bright rounded-md">
+              <Bookmark className="fill-primary stroke-0" />
+            </div>
+            <Skeleton width="100%" height={240} />
+            <div className="p-4 flex flex-col gap-2">
+                <Skeleton width={100} height={20} />
+              <Skeleton width={150} height={15} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 
 function SavedRestaurantCard(props) {
   const { image, name, location, isResentlyAdded } = props;
