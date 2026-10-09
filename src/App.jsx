@@ -24,6 +24,8 @@ import {
 import Profile from "./pages/profile.jsx";
 import { UserContextProvider } from "./context_API/userContextProvider.jsx";
 import { RestaurantContextProvider } from "./context_API/restaurantContextProvider.jsx";
+import { SkeletonTheme } from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
 function app() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -53,7 +55,9 @@ function app() {
   return (
     <UserContextProvider>
       <RestaurantContextProvider>
-        <RouterProvider router={router} />
+        <SkeletonTheme baseColor="#dbdad9" highlightColor="#fbf9f9">
+          <RouterProvider router={router} />
+        </SkeletonTheme>
       </RestaurantContextProvider>
     </UserContextProvider>
   );
