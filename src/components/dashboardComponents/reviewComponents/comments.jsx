@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUsersByID } from "../../../api/authAPI";
 import { getMenuItems } from "../../../api/menuAPI";
+import Skeleton from "react-loading-skeleton";
 
 function Comments({ reviews = [], loading }) {
   const [enrichedReviews, setEnrichedReviews] = useState([]);
@@ -46,13 +47,13 @@ function Comments({ reviews = [], loading }) {
 
     loadRelatedData();
   }, [reviews]);
-
-  if (loading || isFetchingData) {
-    return <div className="mt-7 text-secondary">Loading metrics...</div>;
-  }
   return (
     <div className="col-span-12 min-w-0 flex flex-col gap-4 md:col-span-7">
-      {enrichedReviews.length === 0 ? (
+      {loading || isFetchingData ? (
+        Array.from({ length: 4 }).map((_, index) => (
+        <CommentSkeleton key={index} />
+        ))
+      ) : enrichedReviews.length === 0 ? (
         <h3>No menu items found</h3>
       ) : (
         enrichedReviews.map((item) => {
@@ -66,15 +67,40 @@ function Comments({ reviews = [], loading }) {
           />;
         })
       )}
-      <button
-        type="button"
-        className="pb-1 text-xs text-on-surface font-semibold border-b-2 border-on-surface self-center"
-      >
-        Load More Reviews
-      </button>
+      {!loading && !isFetchingData && (
+        <button
+          type="button"
+          className="pb-1 text-xs text-on-surface font-semibold border-b-2 border-on-surface self-center"
+        >
+          Load More Reviews
+        </button>
+      )}
     </div>
   );
 }
+
+// skeleton loading component
+const CommentSkeleton = () => (
+  <div className="min-w-0 p-6 relative flex flex-col gap-4 border-2 border-outline-variant">
+    <div className="absolute top-0 right-0 -z-1 w-24 h-24 bg-linear-45 from-surface-variant-trans to-surface-variant"></div>
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <Skeleton circle width={40} height={40} />
+        <div className="flex flex-col gap-0.5">
+          <Skeleton width={100} height={20} />
+          <Skeleton width={80} height={16} />
+        </div>
+      </div>
+    </div>
+    <q className="pb-3 text-sm text-secondary border-b-2 border-outline-variant">
+      <Skeleton count={3} />
+    </q>
+    <div className="min-w-0 flex items-center justify-between">
+      <Skeleton width={150} height={16} />
+      <Skeleton width={60} height={32} />
+    </div>
+  </div>
+);
 
 function Comment(props) {
   const { image, user, time, comment, item } = props;

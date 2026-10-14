@@ -1,7 +1,7 @@
 import ProfileNav from "../components/profileComponents/profileNav";
 import ProfileFooter from "../components/profileComponents/profileFooter";
-import PersonalInfo from "../components/profileComponents/personalInfo";
-import SavedRestaurant from "../components/profileComponents/savedRestaurant";
+import PersonalInfo, { ProfileSkeleton } from "../components/profileComponents/personalInfo";
+import SavedRestaurant, { SavedRestaurantSkeleton } from "../components/profileComponents/savedRestaurant";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context_API/userContextProvider";
 import { getSavedRestaurantByUserId } from "../api/restaurantAPI";
@@ -40,25 +40,27 @@ function Profile() {
   fetchUserData();
 }, [user]);
 
-
-  if (loading) {
-    return <div className="mt-7 text-secondary">Loading metrics...</div>;
-  }
-
   return (
     <>
       <ProfileNav />
       <main className="bg-on-tertiary mt-10">
-        <PersonalInfo
-          image="https://placehold.co/400x400/orange/white"
-          name={user.name}
-          description={user.bio}
-          saved={savedRestaurants.length}
-          favorite={likedMenuItems.length}
-          reviews={reviews.length}
-        />
-        
-        <SavedRestaurant saved={savedRestaurants} />
+        {loading ? (
+          <ProfileSkeleton />
+        ) : (
+          <PersonalInfo
+            image="https://placehold.co/400x400/orange/white"
+            name={user.name}
+            description={user.bio}
+            saved={savedRestaurants.length}
+            favorite={likedMenuItems.length}
+            reviews={reviews.length}
+          />
+        )}
+        {loading ? (
+          <SavedRestaurantSkeleton />
+        ) : (
+          <SavedRestaurant saved={savedRestaurants} />
+        )}
       </main>
       <ProfileFooter />
     </>

@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { getFeaturedRestaurants } from "../../api/restaurantAPI";
+import Skeleton from "react-loading-skeleton";
 
 function CuratedExperiences() {
   const [featuredRestaurants, setFeaturedRestaurants] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getFeaturedRestaurants().then(setFeaturedRestaurants).catch(console.error);
+    getFeaturedRestaurants()
+      .then(setFeaturedRestaurants)
+      .then(() => setLoading(false))
+      .catch(console.error);
   }, []);
 
   return (
@@ -22,21 +27,37 @@ function CuratedExperiences() {
         </a>
       </div>
       <div className="container max-w-4xl py-6 pl-6 mx-auto flex flex-col space-y-6 items-center md:flex-row md:space-x-6">
-        {featuredRestaurants.map((restaurant) => {
-          return (
-            <CuratedCard
-              key={restaurant.id}
-              image="https://placehold.co/400x300/orange/white" //{restaurant.coverImage}
-              name={restaurant.name}
+        {loading ? (
+          <CuratedExperiencesSkeleton />
+        ) : (
+          featuredRestaurants.map((restaurant) => {
+            return (
+              <CuratedCard
+                key={restaurant.id}
+                image="https://placehold.co/400x300/orange/white" //{restaurant.coverImage}
+                name={restaurant.name}
               cuisine={restaurant.category}
               rating={restaurant.rating}
             />
           );
-        })}
+        }))}
       </div>
     </div>
   );
 }
+
+// skeleton component for loading state
+const CuratedExperiencesSkeleton = () => (
+  <div className=" relative flex flex-col justify-center max-w-1/2 md:max-w-1/3">
+    <Skeleton width={400} height={300} />
+    <div className="bg-surface flex flex-col space-x-3 px-4 py-2 rounded-xs md:text-xs md:absolute md:-bottom-8 md:left-1/2 md:-translate-x-1/2 md:w-[90%] md:bg-surface md:shadow-xl md:border-2 md:border-solid md:border-outline-variant">
+      <Skeleton width={200} height={20} />
+      <div className="flex justify-between items-center">
+        <Skeleton width={100} height={15} count={2} />
+      </div>
+    </div>
+  </div>
+);
 
 function CuratedCard(props) {
   const { image, name, cuisine, rating } = props;

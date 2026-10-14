@@ -1,22 +1,19 @@
 import { Heart } from "lucide-react";
 import { useMenu } from "../../../context_API/menuContextProvider";
 import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 function MostEngagedItems() {
   const { menuItems, loading } = useMenu();
-  const [ likeCount, setLikeCount ] = useState(50)
+  const [likeCount, setLikeCount] = useState(50);
 
-  const filteredItems = menuItems.filter(item => item.likesCount > likeCount).sort((a, b) => b.likesCount - a.likesCount);
-
-  if (loading) {
-    return (
-      <div className="container mt-7 text-secondary">Loading menu items...</div>
-    );
-  }
+  const filteredItems = menuItems
+    .filter((item) => item.likesCount > likeCount)
+    .sort((a, b) => b.likesCount - a.likesCount);
 
   const handelClick = () => {
     setLikeCount(0);
-  }
+  };
 
   return (
     <div className="col-span-12 row-span-12 p-4 border-2 border-outline-variant md:col-span-7">
@@ -24,25 +21,50 @@ function MostEngagedItems() {
         Most Engaged Menu Items
       </span>
       <div className="flex flex-col gap-6">
-        {filteredItems.length === 0 ? (
+        {loading ? (
+          Array.from({ length: 7 }).map((_, index) => (
+            <MostEngagedItemSkeleton key={index} />
+          ))
+        ) : filteredItems.length === 0 ? (
           <h3>No menu items found</h3>
         ) : (
           filteredItems.map((item, index) => (
             <MostEngagedItem
               rank={index + 1}
-              image={item.image? item.image :"https://placehold.co/200x100/orange/white"}
+              image={
+                item.image
+                  ? item.image
+                  : "https://placehold.co/200x100/orange/white"
+              }
               name={item.name}
               likes={item.likesCount}
             />
           ))
         )}
-        <button
-          type="button"
-          onClick={handelClick}
-          className="text-sm text-primary underline decoration-primary font-semibold"
-        >
-          VIEW FULL MENU PERFORMANCE
-        </button>
+
+        {!loading && (
+          <button
+            type="button"
+            onClick={handelClick}
+            className="text-sm text-primary underline decoration-primary font-semibold"
+          >
+            VIEW FULL MENU PERFORMANCE
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// skeleton card component for loading state
+function MostEngagedItemSkeleton() {
+  return (
+    <div className="flex items-center gap-2">
+      <Skeleton width={30} height={30} />
+      <Skeleton width={50} height={50} />
+      <div className="flex flex-col gap-2">
+        <Skeleton width={200} height={20} />
+        <Skeleton width={80} height={16} />
       </div>
     </div>
   );

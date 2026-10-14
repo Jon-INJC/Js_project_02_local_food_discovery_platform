@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import LineGraph from "./analyticsLineGraph";
+import Skeleton from "react-loading-skeleton";
 
 // Helper to group raw analytics events into daily metric totals
 function transformAnalyticsData(events) {
@@ -62,9 +63,6 @@ function EngagmentOvertime({ analyticEvents = [], loading }) {
     return transformAnalyticsData(analyticEvents);
   }, [analyticEvents]);
 
-  if (loading) {
-    return <div className="mt-7 text-secondary">Loading metrics...</div>;
-  }
   return (
     <div className="container mt-7 p-6 border-2 border-outline-variant">
       <div className="flex items-center justify-between border-b-2 border-outline-variant">
@@ -81,7 +79,11 @@ function EngagmentOvertime({ analyticEvents = [], loading }) {
         </div>
       </div>
       <div className="h-80 w-full mt-4 md:h-125">
-        <LineGraph engagementData={engagementData} />
+        {loading ? (
+          <Skeleton height="100%" />
+        ) : (
+          <LineGraph engagementData={engagementData} />
+        )}
       </div>
     </div>
   );

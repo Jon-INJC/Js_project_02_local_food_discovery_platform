@@ -1,15 +1,11 @@
 import { Heart, ListFilter, Pencil, Search, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useMenu } from "../../../context_API/menuContextProvider";
+import Skeleton from "react-loading-skeleton";
 
 function ActiveMenu() {
-
   const { menuItems, loading } = useMenu();
   const [searchQuery, setSearchQuery] = useState("");
-
-  if (loading) {
-    return <div className="container mt-7 text-secondary">Loading menu items...</div>;
-  }
 
   const filteredItems = menuItems.filter((item) =>
     item.name?.toLowerCase().includes(searchQuery.toLowerCase()),
@@ -41,24 +37,61 @@ function ActiveMenu() {
           </button>
         </div>
       </div>
-      <div className="grid gap-6 md:grid-cols-2">
-        {filteredItems.length === 0 ? (
+      <div className="container grid justify-items-center gap-6 md:grid-cols-2">
+        {loading ? (
+          Array.from({ length: 4 }).map((_, index) => (
+            <ActiveMenuSkeletonCard key={index} />
+          ))
+        ) : filteredItems.length === 0 ? (
           <h3>No menu items found</h3>
         ) : (
-            filteredItems.map((item) => (
-              <ActiveMenuCard
-                key={item.id || item._id}
-                title={item.name}
-                price={item.price}
-                description={item.description}
-                label={item.isHouseSpecial || item.isTodaySpecial ? "special" : "normal"}
-                likes={item.likesCount || 0}
-                image={
-                  item.image || "https://placehold.co/400x500/orange/white"
-                }
-              />
-            ))
+          filteredItems.map((item) => (
+            <ActiveMenuCard
+              key={item.id || item._id}
+              title={item.name}
+              price={item.price}
+              description={item.description}
+              label={
+                item.isHouseSpecial || item.isTodaySpecial
+                  ? "special"
+                  : "normal"
+              }
+              likes={item.likesCount || 0}
+              image={item.image || "https://placehold.co/400x500/orange/white"}
+            />
+          ))
         )}
+      </div>
+    </div>
+  );
+}
+
+function ActiveMenuSkeletonCard() {
+  return (
+    <div className="w-full max-w-lg mx-auto flex flex-col justify-between p-4 border-2 border-outline-variant">
+      <div className="flex flex-col gap-2">
+        {/* Skeleton for Image */}
+        <Skeleton className="w-full h-48 rounded-none" />
+
+        {/* Skeleton for Title and Price */}
+        <div className="flex justify-between items-center mt-2">
+          <Skeleton width={140} height={24} />
+          <Skeleton width={50} height={20} />
+        </div>
+
+        {/* Skeleton for Description */}
+        <div className="mt-1">
+          <Skeleton count={2} />
+        </div>
+      </div>
+
+      {/* Skeleton for Footer Action Row */}
+      <div className="flex gap-3 items-end pt-2 mt-4 border-t-2 border-outline-variant">
+        <div className="grow">
+          <Skeleton width={80} height={16} />
+        </div>
+        <Skeleton circle width={20} height={20} />
+        <Skeleton circle width={20} height={20} />
       </div>
     </div>
   );
@@ -66,7 +99,7 @@ function ActiveMenu() {
 
 function ActiveMenuCard(props) {
   const { title, price, description, label, likes, image } = props;
-  if ( label === "special") {
+  if (label === "special") {
     return (
       <div className="max-w-lg flex p-4 border-2 border-outline-variant">
         <div className="relative">
@@ -107,9 +140,9 @@ function ActiveMenuCard(props) {
     );
   } else if (label !== "special") {
     return (
-      <div className="max-w-90 flex flex-col justify-between p-4 border-2 border-outline-variant">
+      <div className="w-full max-w-lg mx-auto flex flex-col justify-between p-4 border-2 border-outline-variant">
         <div className="flex flex-col gap-2">
-          <img src={image} alt="" className="w-80 h-48 object-cover" />
+          <img src={image} alt="" className="w-full h-48 object-cover" />
           <div className="flex justify-between">
             <h3 className="text-2xl text-on-surface font-bold font-main-header">
               {title}

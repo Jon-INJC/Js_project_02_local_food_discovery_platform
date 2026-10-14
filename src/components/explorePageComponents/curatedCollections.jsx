@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import { getCuratedCollections } from "../../api/restaurantAPI";
+import Skeleton from "react-loading-skeleton";
 function CuratedCollections() {
   const [collections, setCollections] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getCuratedCollections().then(setCollections).catch(console.error);
+    getCuratedCollections()
+      .then(setCollections)
+      .then(() => setLoading(false))
+      .catch(console.error);
   }, []);
 
   return (
@@ -13,20 +18,33 @@ function CuratedCollections() {
         Curated Collections
       </h2>
       <div className="flex gap-6 pl-4 overflow-x-auto no-scrollbar">
-        {collections.map((collection) => {
-          return (
-            <CuratedCollectionsCard
-              key={collection.id}
-              image={collection.image}
-              title={collection.title}
-              spots={collection.restaurants.length}
-            />
-          );
-        })}
+        {loading ? (
+          <CuratedCollectionsSkeleton />
+        ) : (
+          collections.map((collection) => {
+            return (
+              <CuratedCollectionsCard
+                key={collection.id}
+                image={collection.image}
+                title={collection.title}
+                spots={collection.restaurants.length}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );
 }
+
+// skeleton component for loading state
+const CuratedCollectionsSkeleton = () => (
+  <div className="flex flex-col items-start shrink-0">
+    <Skeleton width={200} height={150} />
+    <Skeleton width={150} height={20} />
+    <Skeleton width={100} height={15} />
+  </div>
+);
 
 function CuratedCollectionsCard(props) {
   const { image, title, spots } = props;
