@@ -50,3 +50,15 @@ export async function getMenuItemLikesByUserId(id) {
 
   return response.json();
 }
+
+export async function getRestaurantMenuCatagory(id) {
+  const response = await fetch(
+    `http://localhost:3000/menuCategories/${id}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch menu catagories");
+  }
+
+  return response.json();
+}
