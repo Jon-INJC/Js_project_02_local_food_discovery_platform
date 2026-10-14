@@ -1,6 +1,6 @@
 import Nav from "../components/navBar";
 import Footer from "../components/footer";
-import MenuHero from "../components/restaurantMenuComponents/MenuHero";
+import MenuHero from "../components/restaurantMenuComponents/menuHero";
 import MenuCategory from "../components/restaurantMenuComponents/menuCategory";
 function Menu() {
   return (
