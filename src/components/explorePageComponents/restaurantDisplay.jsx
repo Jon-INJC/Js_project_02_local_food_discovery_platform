@@ -1,4 +1,5 @@
 import { Bookmark } from "lucide-react";
+import Skeleton from "react-loading-skeleton";
 
 function RestaurantDisplay({ restaurant, onClick }) {
   return (
