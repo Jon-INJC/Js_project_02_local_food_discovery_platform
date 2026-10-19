@@ -4,11 +4,7 @@ import ExploreHero from "../components/explorePageComponents/exploreHero";
 import CuratedCollections from "../components/explorePageComponents/curatedCollections";
 import EditorialSelection from "../components/explorePageComponents/editorialSelection";
 import { useEffect, useState } from "react";
-import {
-  getFeaturedRestaurants,
-  getRestaurant,
-  searchRestaurants,
-} from "../api/restaurantAPI";
+import { getRestaurant, searchRestaurants } from "../api/restaurantAPI";
 import RestaurantDisplay, {
   RestaurantDisplaySkeleton,
 } from "../components/explorePageComponents/restaurantDisplay";
@@ -17,6 +13,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 function Explore() {
   const [searchParams] = useSearchParams();
   const [restaurants, setRestaurants] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [restaurantIds, setRestaurantIds] = useState([]);
   const [title, setTitle] = useState("");
   const [error, setError] = useState("");
@@ -69,13 +66,12 @@ function Explore() {
 
       try {
         const data =
-          query.trim() || category
-            ? await searchRestaurants({ query, category })
-            : await getFeaturedRestaurants();
+          (query.trim() || category) &&
+          (await searchRestaurants({ query, category }));
 
         if (cancelled) return;
 
-        setRestaurants(data);
+        setSearchResults(data);
 
         setTitle(
           query.trim() || category ? "Search Results" : "Featured Restaurants",
@@ -85,7 +81,7 @@ function Explore() {
 
         console.error("Failed to fetch restaurants:", error);
 
-        setRestaurants([]);
+        setSearchResults([]);
         setError("Unable to load restaurants. Please try again.");
       } finally {
         if (!cancelled) {
@@ -117,13 +113,48 @@ function Explore() {
           <ExploreHero />
         </section>
         <section className="w-screen max-w-4xl px-6 mx-auto">
-          <CuratedCollections
-            setTitle={setTitle}
-            setRestaurantIds={setRestaurantIds}
-          />
+          {searchResults.length === 0 && (
+            <CuratedCollections
+              setTitle={setTitle}
+              setRestaurantIds={setRestaurantIds}
+            />
+          )}
         </section>
         <section className="w-screen max-w-4xl px-6 mx-auto">
-          {loading ? (
+          {searchResults.length > 0 ? (
+            loading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
+                {Array.from({ length: 4 }).map((_, index) => (
+                  <RestaurantDisplaySkeleton key={index} />
+                ))}
+              </div>
+            ) : (
+              <div className="container flex flex-col space-y-6 mt-10">
+                <div className="flex items-center justify-between border-b-2 border-outline-variant">
+                  <h2 className="max-w-md text-left text-4xl font-bold font-main-header">
+                    {title ||
+                      (query || category
+                        ? "Search Results"
+                        : "Featured Restaurants")}
+                  </h2>
+                </div>
+
+                <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+                  {searchResults.map((restaurant) => (
+                    <RestaurantDisplay
+                      key={restaurant.id}
+                      restaurant={restaurant}
+                      onClick={() => {
+                        navigation("/menu", {
+                          state: { restaurantId: restaurant.id },
+                        });
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            )
+          ) : loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
               {Array.from({ length: 4 }).map((_, index) => (
                 <RestaurantDisplaySkeleton key={index} />
