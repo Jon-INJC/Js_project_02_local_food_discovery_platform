@@ -67,13 +67,15 @@ function ExploreHero() {
         </select>
       </div>
       <div className="container flex items-center justify-between mt-4 ">
+      <div className="flex items-center w-full px-4 py-2 space-x-2 border-b border-on-surface">
         <input
-          className="w-100 underline underline-offset-3 border-none outline-none focus:ring-0"
+          className="w-100 border-none outline-none focus:ring-0"
           type="text"
           placeholder="Search cuisines, restaurants, or dishes..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+      </div>
         <select
           name="location"
           id="location"
