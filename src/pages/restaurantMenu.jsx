@@ -75,15 +75,7 @@ function Menu() {
           />
           <MenuCategory categories={menuCategories} onCategoryClick={handleCategoryClick} />
         </section>
-        <section className="w-screen max-w-4xl px-6 mx-auto">
-          <div className="container flex flex-col space-y-6 mt-10">
-            <h2 className="max-w-md text-left text-4xl font-bold font-main-header">
-              The Autumn Forage
-            </h2>
-            <p className="text-sm text-secondary block md:max-w-1/2">
-              A curated 9-course experience capturing the transition from late
-              summer abundance to the deep, earthy tones of autumn.
-            </p>
+        <section className="w-screen max-w-4xl px-6 mt-6 mx-auto">
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
               {loading
                 ? Array.from({ length: 4 }).map((_, index) => (
@@ -102,7 +94,6 @@ function Menu() {
                     />
                   ))}
             </div>
-          </div>
         </section>
       </main>
       <Footer />
