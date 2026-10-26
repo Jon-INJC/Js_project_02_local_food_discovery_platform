@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getCuratedCollections } from "../../api/restaurantAPI";
 import Skeleton from "react-loading-skeleton";
-function CuratedCollections() {
+function CuratedCollections({ setTitle, setRestaurantIds }) {
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -17,7 +17,7 @@ function CuratedCollections() {
       <h2 className="max-w-md text-left text-4xl font-bold font-main-header">
         Curated Collections
       </h2>
-      <div className="flex gap-6 pl-4 overflow-x-auto no-scrollbar">
+      <div  className="flex gap-6 pl-4 overflow-x-auto no-scrollbar">
         {loading ? (
           <CuratedCollectionsSkeleton />
         ) : (
@@ -28,6 +28,10 @@ function CuratedCollections() {
                 image={collection.image}
                 title={collection.title}
                 spots={collection.restaurants.length}
+                onClick={() => {
+                  setTitle(collection.title);
+                  setRestaurantIds(collection.restaurants);
+                }}
               />
             );
           })
@@ -47,9 +51,9 @@ const CuratedCollectionsSkeleton = () => (
 );
 
 function CuratedCollectionsCard(props) {
-  const { image, title, spots } = props;
+  const { image, title, spots, onClick } = props;
   return (
-    <div className="flex flex-col items-start shrink-0">
+    <div onClick={onClick} className="flex flex-col items-start shrink-0">
       <img src={image} alt="" className="w-50 h-55 object-cover" />
       <h3 className="max-w-50 text-left text-xl font-bold font-main-header">
         {title}

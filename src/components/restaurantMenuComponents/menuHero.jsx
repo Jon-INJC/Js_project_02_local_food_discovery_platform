@@ -1,4 +1,4 @@
-import { Heart, Share2 } from "lucide-react";
+import { Bookmark, Heart, Share2 } from "lucide-react";
 
 function MenuHero(params) {
     const {image, unknown, name, description, time, location, rating, reviews} = params;
@@ -30,7 +30,7 @@ function MenuHero(params) {
         </div>
         <div className="flex gap-x-2 text-secondary md:text-surface-container-high">
           <div className="w-10 h-7.5 flex items-center justify-center border-3 border-solid border-secondary rounded-sm md:border-surface-container-high">
-            <Heart className="w-4 h-4" />
+            <Bookmark className="w-4 h-4" />
           </div>
           <div className="w-10 h-7.5 flex items-center justify-center border-3 border-solid border-secondary rounded-sm md:border-surface-container-high">
             <Share2 className="w-4 h-4" />

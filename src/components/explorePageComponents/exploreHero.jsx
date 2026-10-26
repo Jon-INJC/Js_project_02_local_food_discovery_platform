@@ -1,4 +1,48 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+
 function ExploreHero() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // 1. Initialize local input state from the URL (e.g., /explore?q=sushi)
+  const [query, setQuery] = useState(searchParams.get("q") || "");
+
+  useEffect(() => {
+    setQuery(searchParams.get("q") || "");
+  }, [searchParams]);
+
+  // 2. Debounce the URL update
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearchParams((prev) => {
+        const newParams = new URLSearchParams(prev);
+        if (query.trim()) {
+          newParams.set("q", query.trim());
+        } else {
+          newParams.delete("q"); // Clean up URL if input is empty
+        }
+        return newParams;
+      });
+    }, 400); // 400ms delay
+
+    // Cleanup timer on every keystroke
+    return () => clearTimeout(timer);
+  }, [query, setSearchParams]);
+
+  function handleCategoryClick(category) {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+
+      if (newParams.get("category") === category) {
+        // Clicking an active category removes the filter.
+        newParams.delete("category");
+      } else {
+        newParams.set("category", category);
+      }
+
+      return newParams;
+    });
+  }
   return (
     <div className="container flex flex-col">
       <div className="hidden md:flex md:flex-col md:space-y-2">
@@ -23,11 +67,15 @@ function ExploreHero() {
         </select>
       </div>
       <div className="container flex items-center justify-between mt-4 ">
+      <div className="flex items-center w-full px-4 py-2 space-x-2 border-b border-on-surface">
         <input
-          className="w-100 underline underline-offset-3 border-none outline-none focus:ring-0"
+          className="w-100 border-none outline-none focus:ring-0"
           type="text"
           placeholder="Search cuisines, restaurants, or dishes..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
         />
+      </div>
         <select
           name="location"
           id="location"
@@ -37,36 +85,21 @@ function ExploreHero() {
         </select>
       </div>
       <div className="container flex space-x-6 mt-4 text-xs font-bold border-b border-outline-variant">
-        <a
-          href="#"
-          className="text-secondary hover:text-primary hover:underline hover:-mt-1 decoration-primary"
-        >
-          COFFEE
-        </a>
-        <a
-          href="#"
-          className="text-secondary hover:text-primary hover:underline hover:-mt-1 decoration-primary"
-        >
-          FINE DINING
-        </a>
-        <a
-          href="#"
-          className="text-secondary hover:text-primary hover:underline hover:-mt-1 decoration-primary"
-        >
-          BREAKFAST
-        </a>
-        <a
-          href="#"
-          className="text-secondary hover:text-primary hover:underline hover:-mt-1 decoration-primary"
-        >
-          SUSHI
-        </a>
-        <a
-          href="#"
-          className="text-secondary hover:text-primary hover:underline hover:-mt-1 decoration-primary"
-        >
-          VEGAN
-        </a>
+        {["Nordic", "Modern European", "Mediterranean", "Café", "VEGAN"].map((cat) => {
+          const isActive = searchParams.get("category:contains") === cat;
+          return (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => handleCategoryClick(cat)}
+              className={`text-secondary hover:text-primary hover:underline hover:-mt-1 decoration-primary pb-2 ${
+                isActive ? "text-primary underline -mt-1" : ""
+              }`}
+            >
+              {cat}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

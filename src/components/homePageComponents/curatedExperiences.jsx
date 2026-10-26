@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFeaturedRestaurants } from "../../api/restaurantAPI";
 import Skeleton from "react-loading-skeleton";
+import { useNavigate } from "react-router-dom";
 
 function CuratedExperiences() {
   const [featuredRestaurants, setFeaturedRestaurants] = useState([]);
@@ -12,6 +13,8 @@ function CuratedExperiences() {
       .then(() => setLoading(false))
       .catch(console.error);
   }, []);
+
+  const navigation = useNavigate();
 
   return (
     <div className="w-full">
@@ -36,11 +39,17 @@ function CuratedExperiences() {
                 key={restaurant.id}
                 image="https://placehold.co/400x300/orange/white" //{restaurant.coverImage}
                 name={restaurant.name}
-              cuisine={restaurant.category}
-              rating={restaurant.rating}
-            />
-          );
-        }))}
+                cuisine={restaurant.category}
+                rating={restaurant.rating}
+                onClick={() => {
+                  navigation("/menu", {
+                    state: { restaurantId: restaurant.id },
+                  });
+                }}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );
@@ -60,9 +69,9 @@ const CuratedExperiencesSkeleton = () => (
 );
 
 function CuratedCard(props) {
-  const { image, name, cuisine, rating } = props;
+  const { image, name, cuisine, rating, onClick } = props;
   return (
-    <div className=" relative flex flex-col justify-center max-w-1/2 md:max-w-1/3">
+    <div onClick={onClick} className=" relative flex flex-col justify-center max-w-1/2 md:max-w-1/3">
       <div>
         <img src={image} alt="" />
       </div>
