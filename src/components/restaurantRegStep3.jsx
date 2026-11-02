@@ -10,15 +10,19 @@ function RegStep3() {
 
   const onSubmit = async (data) => {
     try {
-      let restaurantData = await getRestaurantByName(data.name);
-      if (restaurantData) {
+      let restaurantData = await getRestaurantByName(data.restaurantName);
+      if (restaurantData.length > 0) {
         setError("root", {
           type: "manual",
-          message: "An account was found with this email address.",
+          message: "A restaurant was found with this name address.",
         });
         return;
       }
-      restaurantData = await setRestaurant(data);
+      const payload = new FormData();
+      for (const [key, value] of Object.entries(data)) {
+        payload.append(key, value);
+      }
+      restaurantData = await setRestaurant(payload);
     } catch (err) {
       setError("root", {
         type: "manual",
