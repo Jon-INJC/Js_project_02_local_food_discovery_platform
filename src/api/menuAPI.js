@@ -62,3 +62,15 @@ export async function getRestaurantMenuCatagory(id) {
 
   return response.json();
 }
+
+export async function getMenuCatagories() {
+  const response = await fetch(
+    `http://localhost:3000/menuCategories`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch menu catagories");
+  }
+
+  return response.json();
+}
