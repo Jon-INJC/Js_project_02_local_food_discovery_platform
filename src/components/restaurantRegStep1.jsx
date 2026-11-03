@@ -2,12 +2,28 @@ import { useNavigate } from "react-router-dom";
 import { useFormContext } from "react-hook-form";
 import Error from "./error";
 import { ArrowRight } from "lucide-react";
+import { getCuratedCollections } from "../api/restaurantAPI";
+import { useEffect, useState } from "react";
 function RegStep1() {
   const {
     register,
     trigger,
     formState: { errors },
   } = useFormContext();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await getCuratedCollections();
+        setCategories(response);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -88,9 +104,9 @@ function RegStep1() {
             />
             <Error text={errors.category?.message} />
             <datalist id="items-list">
-              <option value="Apple"></option>
-              <option value="Banana"></option>
-              <option value="Cherry"></option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.title} >{category.title}</option>
+              ))}
             </datalist>
           </div>
           <div className="flex flex-col gap-y-2">

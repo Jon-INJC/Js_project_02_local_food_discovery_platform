@@ -1,31 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { ImagePlus, X } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import Error from "../error";
-import { getMenuItemsByName, setMenuItem } from "../../api/menuAPI";
+import { getMenuCatagories, getMenuItemsByName, setMenuItem } from "../../api/menuAPI";
 function AddMenu() {
-  const { control, register, handleSubmit, setError, formState } = useForm();
+  const [isHouseSpecial, setIsHouseSpecial] = useState(false);
+  const [isTodaysSpecial, setIsTodaysSpecial] = useState(false);
+  const [menuCatagories, setMenuCatagories] = useState([]);
+
+  useEffect(() => {
+    const fetchMenuCatagories = async () => {
+      try {
+        const response = await getMenuCatagories();
+        setMenuCatagories(response);
+      } catch (error) {
+        console.error("Error fetching menu catagories:", error);
+      }
+    };
+
+    fetchMenuCatagories();
+  }, []);
+
+  const { control, register, handleSubmit, setError, formState, reset } =
+    useForm();
   const { errors } = formState;
 
   const onSubmit = async (data) => {
-      try {
-        let menuItemData = await getMenuItemsByName(data.dishNomenclature);
-        if (menuItemData.length) {
-          setError("root", {
-            type: "manual",
-            message: "A menu item was found with this menu name.",
-          });
-          return;
-        }
-        menuItemData = await setMenuItem(data);
-      } catch (err) {
+    try {
+      let menuItemData = await getMenuItemsByName(data.dishNomenclature);
+      if (menuItemData.length) {
         setError("root", {
           type: "manual",
-          message: err.message || "An unexpected error occurred",
+          message: "A menu item was found with this menu name.",
         });
+        return;
       }
-    };
+      data.houseSpecial = isHouseSpecial;
+      data.todaysSpecial = isTodaysSpecial;
+      const payload = new FormData();
+      for (const [key, value] of Object.entries(data)) {
+        payload.append(key, value);
+      }
+      menuItemData = await setMenuItem(payload);
+    } catch (err) {
+      setError("root", {
+        type: "manual",
+        message: err.message || "An unexpected error occurred",
+      });
+    }
+  };
+
+  const handleToggle = (i) => {
+    if (i === 1) {
+      setIsHouseSpecial(!isHouseSpecial);
+    } else if (i === 2) {
+      setIsTodaysSpecial(!isTodaysSpecial);
+    }
+  };
+
+  const handleDiscard = () => {
+    // Reset form fields and state
+    reset();
+    setIsHouseSpecial(false);
+    setIsTodaysSpecial(false);
+  };
 
   return (
     <>
@@ -39,12 +78,6 @@ function AddMenu() {
               Add a new culinary creation to your portfolio.
             </p>
           </div>
-          <button
-            type="button"
-            className="text-secondary cursor-pointer hover:text-on-surface hover:scale-110 transition-transform"
-          >
-            <X />
-          </button>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -122,9 +155,11 @@ function AddMenu() {
                 />
                 <Error text={errors.category?.message} />
                 <datalist id="items-list">
-                  <option value="appetizer">Appetizer</option>
-                  <option value="main-course">Main Course</option>
-                  <option value="dessert">Dessert</option>
+                  {menuCatagories.map((category) => (
+                    <option key={category.id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
                 </datalist>
               </div>
               <div className="flex flex-col gap-y-2">
@@ -160,6 +195,12 @@ function AddMenu() {
               <textarea
                 id="narrative"
                 placeholder="Describe the culinary story behind this dish..."
+                {...register("narrative", {
+                  required: {
+                    value: true,
+                    message: "Culinary narrative is Required",
+                  },
+                })}
                 className="border-none outline-none focus:ring-0"
               />
             </div>
@@ -169,16 +210,40 @@ function AddMenu() {
               <span className="text-sm text-on-surface-variant font-semibold">
                 Designate as House Special
               </span>
-              <button type="button" className="w-12.5 h-5 bg-surface-container-highest rounded-full cursor-pointer shadow-md relative">
-                <div className="w-4 h-4 bg-on-tertiary rounded-full absolute left-1 top-1/2 -translate-y-1/2"></div>
+              <button
+                type="button"
+                className={`w-12.5 h-6 rounded-full cursor-pointer shadow-md relative transition-colors duration-200 ${
+                  isHouseSpecial
+                    ? "bg-primary"
+                    : "bg-surface-container-highest"
+                }`}
+                onClick={() => handleToggle(1)}
+              >
+                <div
+                  className={`w-5 h-5 bg-on-tertiary rounded-full absolute top-0.5 left-0.5 transition-transform duration-200 shadow-sm ${
+                    isHouseSpecial ? "translate-x-7" : "translate-x-0"
+                  }`}
+                ></div>
               </button>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm text-on-surface-variant font-semibold">
                 Feature as Today's Special
               </span>
-              <button type="button" className="w-12.5 h-5 bg-surface-container-highest rounded-full cursor-pointer shadow-md relative">
-                <div className="w-4 h-4 bg-on-tertiary rounded-full absolute left-1 top-1/2 -translate-y-1/2"></div>
+              <button
+                type="button"
+                className={`w-12.5 h-6 rounded-full cursor-pointer shadow-md relative transition-colors duration-200 ${
+                  isTodaysSpecial
+                    ? "bg-primary"
+                    : "bg-surface-container-highest"
+                }`}
+                onClick={() => handleToggle(2)}
+              >
+                <div
+                  className={`w-5 h-5 bg-on-tertiary rounded-full absolute top-0.5 left-0.5 transition-transform duration-200 shadow-sm ${
+                    isTodaysSpecial ? "translate-x-7" : "translate-x-0"
+                  }`}
+                ></div>
               </button>
             </div>
           </section>
@@ -191,6 +256,7 @@ function AddMenu() {
             </button>
             <button
               type="button"
+              onClick={handleDiscard}
               className="px-4 py-2 text-xs font-semibold border-2 border-secondary text-secondary focus:outline-none cursor-pointer hover:bg-secondary hover:text-on-tertiary transition-colors"
             >
               Discard
