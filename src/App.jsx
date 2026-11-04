@@ -25,7 +25,7 @@ import Profile from "./pages/profile.jsx";
 import { UserContextProvider } from "./context_API/userContextProvider.jsx";
 import { RestaurantContextProvider } from "./context_API/restaurantContextProvider.jsx";
 import { SkeletonTheme } from "react-loading-skeleton";
-import 'react-loading-skeleton/dist/skeleton.css';
+import "react-loading-skeleton/dist/skeleton.css";
 function app() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -34,6 +34,7 @@ function app() {
         <Route path="explore" element={<Explore />} />
         <Route path="menu" element={<Menu />} />
         <Route path="register" element={<RegisterForm />}>
+          <Route index element={<Navigate to="step1" />} />
           <Route path="step1" element={<RegStep1 />} />
           <Route path="step2" element={<RegStep2 />} />
           <Route path="step3" element={<RegStep3 />} />
