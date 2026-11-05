@@ -12,7 +12,7 @@ export async function getMenuItems(id) {
 
 export async function getMenuItemsByName(name) {
   const response = await fetch(
-    `http://localhost:3000/menuItems?name=${name}`
+    `http://localhost:3000/menuItems?name=${encodeURIComponent(name)}`
   );
 
   if (!response.ok) {
@@ -23,7 +23,8 @@ export async function getMenuItemsByName(name) {
 }
 
 export async function setMenuItem(data){
-  console.log(data);
+  data.append("Success", true);
+  data.append("message", "Menu item added successfully!");
   return data;
 }
 
