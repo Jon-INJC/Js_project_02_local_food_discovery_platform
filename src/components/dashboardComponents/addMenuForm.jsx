@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { useDropzone } from "react-dropzone";
 import { ImagePlus, X } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import Error from "../error";
-import { getMenuCatagories, getMenuItemsByName, setMenuItem } from "../../api/menuAPI";
+import {
+  getMenuCatagories,
+  getMenuItemsByName,
+  setMenuItem,
+} from "../../api/menuAPI";
+import ConfirmationModal from "../modalsAndMessages/confirmationModal";
 function AddMenu() {
   const [isHouseSpecial, setIsHouseSpecial] = useState(false);
   const [isTodaysSpecial, setIsTodaysSpecial] = useState(false);
   const [menuCatagories, setMenuCatagories] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState({});
 
   useEffect(() => {
     const fetchMenuCatagories = async () => {
@@ -27,28 +36,47 @@ function AddMenu() {
   const { errors } = formState;
 
   const onSubmit = async (data) => {
-    try {
-      let menuItemData = await getMenuItemsByName(data.dishNomenclature);
-      if (menuItemData.length) {
+    setIsSubmitting(true);
+    setTimeout(async () => {
+      try {
+        let menuItemData = await getMenuItemsByName(data.dishNomenclature);
+        if (menuItemData.length) {
+          setConfirmationMessage({
+            header: "Dish Cannot Be Published!",
+            message: "A menu item was found with this menu name.",
+            type: "error",
+          });
+          setIsModalOpen(true);
+          setIsSubmitting(false);
+          return;
+        }
+        data.houseSpecial = isHouseSpecial;
+        data.todaysSpecial = isTodaysSpecial;
+        const payload = new FormData();
+        for (const [key, value] of Object.entries(data)) {
+          payload.append(key, value);
+        }
+        menuItemData = Object.fromEntries(await setMenuItem(payload));
+
+        if (menuItemData && menuItemData.Success) {
+          setConfirmationMessage({
+            header: "Dish Published Successfully!",
+            message: "Your new culinary creation has been added to the restaurant menu. It is now live and visible to your patrons.",
+            type: "success",
+          });
+          setIsModalOpen(true);
+          reset();
+          setIsHouseSpecial(false);
+          setIsTodaysSpecial(false);
+        }
+        setIsSubmitting(false);
+      } catch (err) {
         setError("root", {
           type: "manual",
-          message: "A menu item was found with this menu name.",
+          message: err.message || "An unexpected error occurred",
         });
-        return;
       }
-      data.houseSpecial = isHouseSpecial;
-      data.todaysSpecial = isTodaysSpecial;
-      const payload = new FormData();
-      for (const [key, value] of Object.entries(data)) {
-        payload.append(key, value);
-      }
-      menuItemData = await setMenuItem(payload);
-    } catch (err) {
-      setError("root", {
-        type: "manual",
-        message: err.message || "An unexpected error occurred",
-      });
-    }
+    }, 2000);
   };
 
   const handleToggle = (i) => {
@@ -213,9 +241,7 @@ function AddMenu() {
               <button
                 type="button"
                 className={`w-12.5 h-6 rounded-full cursor-pointer shadow-md relative transition-colors duration-200 ${
-                  isHouseSpecial
-                    ? "bg-primary"
-                    : "bg-surface-container-highest"
+                  isHouseSpecial ? "bg-primary" : "bg-surface-container-highest"
                 }`}
                 onClick={() => handleToggle(1)}
               >
@@ -249,20 +275,27 @@ function AddMenu() {
           </section>
           <div className="py-6 flex flex-row-reverse gap-6">
             <button
+              disabled={isSubmitting}
               type="submit"
-              className="px-4 py-2 text-xs font-semibold bg-secondary text-on-tertiary focus:outline-none cursor-pointer hover:border-2 hover:border-secondary hover:bg-on-tertiary hover:text-secondary transition-colors"
+              className={`px-4 py-2 text-xs font-semibold bg-secondary text-on-tertiary focus:outline-none hover:border-2 hover:border-secondary hover:bg-on-tertiary hover:text-secondary transition-colors ${isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
             >
               Publish Dish
             </button>
             <button
+              disabled={isSubmitting}
               type="button"
               onClick={handleDiscard}
-              className="px-4 py-2 text-xs font-semibold border-2 border-secondary text-secondary focus:outline-none cursor-pointer hover:bg-secondary hover:text-on-tertiary transition-colors"
+              className={`px-4 py-2 text-xs font-semibold border-2 border-secondary text-secondary focus:outline-none hover:bg-secondary hover:text-on-tertiary transition-colors ${isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
             >
               Discard
             </button>
           </div>
         </form>
+        <ConfirmationModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          confirmationMessage={confirmationMessage}
+        />
       </div>
     </>
   );
