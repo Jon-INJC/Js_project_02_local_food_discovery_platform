@@ -29,6 +29,6 @@ export async function getUsersByID(id) {
 }
 
 export async function setUsers(data) {
-  console.log(data);
-  return data;
+  console.log({...data, Success: true, message: "User created successfully"});
+  return {...data, Success: true, message: "User created successfully"};
 }
