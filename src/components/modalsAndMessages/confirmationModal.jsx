@@ -53,10 +53,10 @@ export default function ConfirmationModal({
         </div>
 
         {/* Detailed Confirmation Content */}
-        <h2 className="text-2xl font-extrabold text-slate-800">
+        <h2 className="text-2xl font-extrabold font-main-header text-slate-800">
           {confirmationMessage.header}
         </h2>
-        <p className="mt-2 text-sm text-slate-500 leading-relaxed">
+        <p className="mt-2 text-sm font-main-body text-slate-500 leading-relaxed">
           {confirmationMessage.message}
         </p>
 
@@ -64,7 +64,7 @@ export default function ConfirmationModal({
         <div className="mt-6">
           <button
             onClick={onClose}
-            className="w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-on-tertiary shadow-md transition-all hover:bg-primary-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 active:scale-95"
+            className="w-full rounded-xl bg-primary px-5 py-3 text-sm font-semibold font-main-body text-on-tertiary shadow-md transition-all hover:bg-primary-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 active:scale-95"
           >
             Back to Dashboard
           </button>
