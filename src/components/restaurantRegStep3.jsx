@@ -1,34 +1,71 @@
-import { useFormContext } from "react-hook-form";
+import { set, useFormContext } from "react-hook-form";
 import Error from "./error";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { getRestaurantByName, setRestaurant } from "../api/restaurantAPI";
+import { useContext, useState } from "react";
+import Spinner from "./spinner";
+import PopUpMessage from "./modalsAndMessages/popUpMessage";
+import { RestaurantContext } from "../context_API/restaurantContextProvider";
 function RegStep3() {
+  const { setRestaurantValue } = useContext(RestaurantContext);
   const navigate = useNavigate();
   const { register, handleSubmit, setError, formState } = useFormContext();
   const { errors } = formState;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState({});
 
   const onSubmit = async (data) => {
-    try {
-      let restaurantData = await getRestaurantByName(data.restaurantName);
-      if (restaurantData.length > 0) {
+    setIsSubmitting(true);
+    setTimeout(async () => {
+      try {
+        let restaurantData = await getRestaurantByName(data.restaurantName);
+        if (restaurantData.length > 0) {
+          setError("root", {
+            type: "manual",
+            message: "A restaurant was found with this name address.",
+          });
+          setIsSubmitting(false);
+          setIsModalOpen(true);
+          setConfirmationMessage({
+            header: "Registration Failed!",
+            message: "A restaurant was found with this name address.",
+            type: "error",
+          });
+          setTimeout(() => {
+            setIsModalOpen(false);
+          }, 2000);
+          return;
+        }
+        const payload = new FormData();
+        for (const [key, value] of Object.entries(data)) {
+          payload.append(key, value);
+        }
+        restaurantData = Object.fromEntries(await setRestaurant(payload));
+
+        if (restaurantData) {
+          setIsSubmitting(false);
+          setConfirmationMessage({
+            header: "Registration Successful!",
+            message:
+              "Your restaurant has been successfully registered. Redirecting you to your restaurant dashboard.",
+            type: "success",
+          });
+          setIsModalOpen(true);
+          setTimeout(() => {
+            setRestaurantValue(restaurantData);
+            navigate("/dashboard/overview");
+            setIsModalOpen(false);
+          }, 2000);
+        }
+      } catch (err) {
         setError("root", {
           type: "manual",
-          message: "A restaurant was found with this name address.",
+          message: err.message || "An unexpected error occurred",
         });
-        return;
       }
-      const payload = new FormData();
-      for (const [key, value] of Object.entries(data)) {
-        payload.append(key, value);
-      }
-      restaurantData = await setRestaurant(payload);
-    } catch (err) {
-      setError("root", {
-        type: "manual",
-        message: err.message || "An unexpected error occurred",
-      });
-    }
+    }, 2000);
   };
 
   return (
@@ -137,21 +174,33 @@ function RegStep3() {
           </div>
           <div className="flex justify-between pt-6">
             <button
+              disabled={isSubmitting}
               type="button"
               onClick={() => navigate("/register/step2")}
-              className="px-4 py-2 border border-secondary font-bold font-main-header"
+              className={`px-4 py-2 border border-secondary font-bold font-main-header text-secondary ${isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-surface-variant"}`}
             >
               Back
             </button>
 
             <button
+              disabled={isSubmitting}
               type="submit"
-              className="flex items-center gap-2 px-4 py-2 bg-secondary text-on-tertiary cursor-pointer"
+              className={`flex items-center gap-2 px-4 py-2 bg-secondary text-on-tertiary cursor-pointer ${isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-surface-variant"}`}
             >
-              Continue <ArrowRight />
+              {isSubmitting ? (
+                <Spinner />
+              ) : (
+                <>
+                  Submit <ArrowRight />
+                </>
+              )}
             </button>
           </div>
         </form>
+        <PopUpMessage
+          isOpen={isModalOpen}
+          confirmationMessage={confirmationMessage}
+        />
       </div>
     </>
   );

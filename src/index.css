@@ -10,7 +10,7 @@
     }
 }
 
-@theme{
+@theme {
 
     --font-main-header: "Playfair Display", serif;
     --font-main-body: "Inter", sans-serif;
@@ -45,6 +45,31 @@
     --color-inverse-surface: oklch(30.956% 0.0018 286.009);
     --color-secondary-fixed-dim: oklch(82.787% 0.00257 47.298);
     --color-error: oklch(50.6% 0.19265 27.689);
+    --color-error-container: oklch(91.825% 0.04173 25.097);
 
     --background-image-dish-img: url('./assets/Placeholder_background.png')
+}
+
+@keyframes checkmark {
+  0% {
+    stroke-dashoffset: 30;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.25s ease-out forwards;
 }
