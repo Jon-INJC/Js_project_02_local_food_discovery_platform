@@ -32,7 +32,7 @@ function app() {
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path="explore" element={<Explore />} />
-        <Route path="menu" element={<Menu />} />
+        <Route path="menu/:restaurantId/:restaurant" element={<Menu />} />
         <Route path="register" element={<RegisterForm />}>
           <Route index element={<Navigate to="step1" />} />
           <Route path="step1" element={<RegStep1 />} />
