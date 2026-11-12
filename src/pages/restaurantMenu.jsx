@@ -2,13 +2,13 @@ import Nav from "../components/navBar";
 import Footer from "../components/footer";
 import MenuHero from "../components/restaurantMenuComponents/menuHero";
 import MenuCategory from "../components/restaurantMenuComponents/menuCategory";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { getRestaurant } from "../api/restaurantAPI";
 import { useEffect, useState } from "react";
 import { getRestaurantMenuCatagory, getRestaurantMenuItems } from "../api/menuAPI";
 import Skeleton from "react-loading-skeleton";
 function Menu() {
-  const restaurantId = useLocation().state?.restaurantId;
+  const { restaurantId } = useParams();
   const [restaurant, setRestaurant] = useState({});
   const [menuItems, setMenuItems] = useState([]);
   const [menuCategories, setMenuCategories] = useState([]);
@@ -60,9 +60,10 @@ function Menu() {
 
   return (
     <>
+    <div className="min-h-screen flex flex-col">
       <Nav />
-      <main className="bg-on-tertiary">
-        <section className="w-screen max-w-4xl md:px-6 mx-auto">
+      <main className="grow p-6 md:p-10 bg-on-tertiary">
+        <section className="w-full max-w-4xl md:px-6 mx-auto">
           <MenuHero
             image={restaurant.coverImage}
             unknown={restaurant.category}
@@ -75,7 +76,7 @@ function Menu() {
           />
           <MenuCategory categories={menuCategories} onCategoryClick={handleCategoryClick} />
         </section>
-        <section className="w-screen max-w-4xl px-6 mt-6 mx-auto">
+        <section className="w-full max-w-4xl px-6 mt-6 mx-auto">
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
               {loading
                 ? Array.from({ length: 4 }).map((_, index) => (
@@ -97,6 +98,7 @@ function Menu() {
         </section>
       </main>
       <Footer />
+      </div>
     </>
   );
 }

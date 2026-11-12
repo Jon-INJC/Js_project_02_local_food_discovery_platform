@@ -145,9 +145,7 @@ function Explore() {
                       key={restaurant.id}
                       restaurant={restaurant}
                       onClick={() => {
-                        navigation("/menu", {
-                          state: { restaurantId: restaurant.id },
-                        });
+                        navigation(`/menu/${encodeURIComponent(restaurant.id)}/${encodeURIComponent(restaurant.name)}`);
                       }}
                     />
                   ))}
@@ -177,9 +175,7 @@ function Explore() {
                     key={restaurant.id}
                     restaurant={restaurant}
                     onClick={() => {
-                      navigation("/menu", {
-                        state: { restaurantId: restaurant.id },
-                      });
+                      navigation(`/menu/${encodeURIComponent(restaurant.id)}/${encodeURIComponent(restaurant.name)}`);
                     }}
                   />
                 ))}
